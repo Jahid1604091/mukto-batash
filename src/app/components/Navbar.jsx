@@ -1,36 +1,34 @@
 "use client";
-import { Button } from "bootstrap";
 import React from "react";
-import {
-  Container,
-  Form,
-  InputGroup,
-  Nav,
-  NavDropdown,
-  Navbar,
-} from "react-bootstrap";
-
+import fnLogo from "../../../public/assets/images/fn_logo.svg";
+import user from "../../../public/assets/images/user.jpg";
+import { Container, Form, Nav, Navbar } from "react-bootstrap";
+import Image from "next/image";
+import { FaRegBell, FaSearch } from "react-icons/fa";
 const NavbarComponent = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+    <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="#home">
           {" "}
-          <img
-            alt=""
-            src="/img/logo.svg"
-            width="30"
-            height="30"
+          <Image
+            alt="FN Logo"
+            src={fnLogo}
+            width="27"
+            height="46"
             className="d-inline-block align-top"
           />{" "}
-          React-Bootstrap
+          <span className="h2"> মুক্ত বাতাস</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto">
-            <Form.Select aria-label="Default select example">
-              <option>Open this select menu</option>
+            <Form.Select
+              aria-label="Default select example"
+              className="rounded-pill bg-light text-dark"
+            >
+              <option>আপনার এলাকায় সেন্সর স্থাপনের জন্য আবেদন করুন</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
@@ -38,8 +36,12 @@ const NavbarComponent = () => {
           </Nav>
 
           <Nav className="mx-auto">
-            <Form.Select aria-label="Default select example">
-              <option>Open this select menu</option>
+            <Form.Select
+              aria-label="Default select example"
+              className="rounded-pill bg-light text-dark"
+            >
+              <option>ভাষা নির্বাচন করুন</option>
+              <option>বাংলা</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
@@ -47,9 +49,26 @@ const NavbarComponent = () => {
           </Nav>
 
           <Nav className="m">
-            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link href="#deets">
+              <div className="border rounded-circle bg-light text-dark py-1 px-2">
+                <FaRegBell size={15} />
+              </div>
+            </Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
-              Dank memes
+              <div className="border rounded-circle bg-light text-dark py-1 px-2">
+                <FaSearch size={15} />
+              </div>
+            </Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+              <div className="border rounded-circle bg-light text-dark p-1">
+                <Image
+                  src={user}
+                  height={25}
+                  width={25}
+                  alt="user"
+                  className="rounded-circle"
+                />
+              </div>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
