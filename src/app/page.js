@@ -1,11 +1,11 @@
 'use client'
-import Image from "next/image";
 // import styles from "./page.module.css";
-import { useEffect } from "react";
 import SubNavbar from "./components/SubNavbar";
 import { Col, Container, Row } from "react-bootstrap";
 import QualityIndexCard from "./components/Cards/QualityIndex";
-import QualityMeterCard from "./components/Cards/QualityMeterCard";
+import DustQuality from "./components/Cards/DustQuality";
+import HumQuality from "./components/Cards/HumQuality";
+import GasQuality from "./components/Cards/GasQuality";
 
 export default function Home() {
 
@@ -22,9 +22,9 @@ export default function Home() {
             </Col>
             <Col md={8}>
               <div className="d-flex justify-content-between">
-                <QualityMeterCard title='ধূলিকণা' />
-                <QualityMeterCard  title='আর্দ্রতা ও তাপমাত্রা' />
-                <QualityMeterCard title='ক্ষতিকারক গ্যাস'  />
+                <DustQuality title='ধূলিকণা' value={193} />
+                <HumQuality title='আর্দ্রতা ও তাপমাত্রা' value={233}/>
+                <GasQuality title='ক্ষতিকারক গ্যাস' value={523}/>
               </div>
             </Col>
           </Row>
