@@ -1,11 +1,14 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import fnLogo from "../../../public/assets/images/fn_logo.svg";
 import user from "../../../public/assets/images/user.jpg";
-import { Container, Form, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import Image from "next/image";
 import { FaRegBell, FaSearch } from "react-icons/fa";
+import FormModal from "./FormModal";
 const NavbarComponent = () => {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark">
       <Container>
@@ -24,15 +27,12 @@ const NavbarComponent = () => {
 
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto">
-            <Form.Select
+            <Button onClick={handleShow}
               aria-label="Default select example"
               className="rounded-pill bg-light text-dark"
             >
-              <option>আপনার এলাকায় সেন্সর স্থাপনের জন্য আবেদন করুন</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
+              আপনার এলাকায় সেন্সর স্থাপনের জন্য আবেদন করুন
+            </Button>
           </Nav>
 
           <Nav className="mx-auto">
@@ -72,6 +72,7 @@ const NavbarComponent = () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <FormModal handleShow={handleShow} show={show} setShow={setShow} />
       </Container>
     </Navbar>
   );
