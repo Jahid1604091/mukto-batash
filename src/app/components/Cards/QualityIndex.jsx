@@ -52,9 +52,9 @@ function QualityIndexCard() {
         </tr>
       </tbody>
       </Table>
-      <small className="text-center">
-        এয়ার কোয়ালিটি ইনডেক্স (নির্দেশক রং ও তার অর্থ)
-      </small>
+      <div className="text-center" style={{marginTop:"-10px"}}>
+        <p>এয়ার কোয়ালিটি ইনডেক্স (নির্দেশক রং ও তার অর্থ)</p>
+      </div>
     </Card>
   );
 }

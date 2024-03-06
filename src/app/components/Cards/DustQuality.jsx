@@ -88,7 +88,7 @@ const DustQuality = ({
           />
           <Card.Text className="my-4">
             <small>পি এম ১</small>
-            <p>১৯৩ পিপিএম</p>
+            <p className="fw-bold">১৯৩ পিপিএম</p>
           </Card.Text>
         </div>
         <div className="d-flex" style={{height:"80px",borderBottom:"1px solid #B4B1B1"}}>
@@ -146,7 +146,7 @@ const DustQuality = ({
           />
           <Card.Text className="my-4">
             <small>পি এম ১</small>
-            <p>১৯৩ পিপিএম</p>
+            <p className="fw-bold">১৯৩ পিপিএম</p>
           </Card.Text>
         </div>
         <div className="d-flex" style={{height:"80px"}}>
@@ -204,7 +204,7 @@ const DustQuality = ({
           />
           <Card.Text className="my-4">
             <small>পি এম ১</small>
-            <p>১৯৩ পিপিএম</p>
+            <p className="fw-bold">১৯৩ পিপিএম</p>
           </Card.Text>
         </div>
       </Card.Body>

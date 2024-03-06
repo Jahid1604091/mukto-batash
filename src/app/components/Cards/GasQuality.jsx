@@ -88,7 +88,7 @@ const GasQuality = ({
           />
           <Card.Text className="my-4">
             <small>কার্বন মনোক্সাইড </small>
-            <p>২৫ পিপিএম</p>
+            <p className="fw-bold">২৫ পিপিএম</p>
           </Card.Text>
         </div>
         <div className="d-flex" >
@@ -146,7 +146,7 @@ const GasQuality = ({
           />
           <Card.Text className="my-4">
             <small>কার্বন ডাই অক্সাইড </small>
-            <p>৬৯৮ পিপিএম</p>
+            <p className="fw-bold">৬৯৮ পিপিএম</p>
           </Card.Text>
         </div>
       
