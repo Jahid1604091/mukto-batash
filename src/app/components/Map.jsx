@@ -136,7 +136,7 @@ const handleMarkerClick = (marker) =>{
     >
       {markers?.map((marker) => {
         return (
-          <div>
+          <div key={marker.id}>
             <Marker
               position={marker.coordinates}
               onClick={() => handleMarkerClick(marker)}

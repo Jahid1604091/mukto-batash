@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Tab, Tabs } from "react-bootstrap";
 import Temperature from "./Temperature";
 
 const Weather = () => {
+  const [key, setKey] = useState("temperature");
   return (
     <Card className="rounded-4 bg-dark text-light">
       <Card.Body>
         <Tabs
-          defaultActiveKey="home"
-          id="uncontrolled-tab-example"
-          className="mb-3"
+          defaultActiveKey="temperature"
+          className="mb-3 text-light border-0"
+          activeKey={key}
+          onSelect={(k) => setKey(k)}
         >
-          <Tab eventKey="home" title="তাপমাত্রা">
+          <Tab eventKey="temperature" title="তাপমাত্রা">
             <Temperature />
             <div className="d-flex justify-content-around">
               <div className="d-flex flex-column align-items-center">
@@ -21,13 +23,13 @@ const Weather = () => {
                     width: "50px",
                     height: "50px",
                     borderRadius: "100%",
-                    background: "yellow",
+                    background: "#E3AE09",
                   }}
                 ></div>
                 <p>22 &deg; C</p>
               </div>
               <div className="d-flex flex-column align-items-center">
-                Sat
+                Sun
                 <div
                   style={{
                     width: "50px",
@@ -36,10 +38,22 @@ const Weather = () => {
                     background: "yellow",
                   }}
                 ></div>
-                <p>22 &deg; C</p>
+                <p>25 &deg; C</p>
               </div>
               <div className="d-flex flex-column align-items-center">
-                Sat
+                Mon
+                <div
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    borderRadius: "100%",
+                    background: "#eebf31",
+                  }}
+                ></div>
+                <p>21 &deg; C</p>
+              </div>
+              <div className="d-flex flex-column align-items-center">
+                Tue
                 <div
                   style={{
                     width: "50px",
@@ -48,60 +62,51 @@ const Weather = () => {
                     background: "yellow",
                   }}
                 ></div>
-                <p>22 &deg; C</p>
+                <p>25 &deg; C</p>
               </div>
               <div className="d-flex flex-column align-items-center">
-                Sat
+                Wed
                 <div
                   style={{
                     width: "50px",
                     height: "50px",
                     borderRadius: "100%",
-                    background: "yellow",
+                    background: "#E3AE09",
                   }}
                 ></div>
-                <p>22 &deg; C</p>
+                <p>23 &deg; C</p>
               </div>
               <div className="d-flex flex-column align-items-center">
-                Sat
+                Thu
                 <div
                   style={{
                     width: "50px",
                     height: "50px",
                     borderRadius: "100%",
-                    background: "yellow",
+                    background: "#E3AE09",
                   }}
                 ></div>
                 <p>22 &deg; C</p>
               </div>
               <div className="d-flex flex-column align-items-center">
-                Sat
+                Fri
                 <div
                   style={{
                     width: "50px",
                     height: "50px",
                     borderRadius: "100%",
-                    background: "yellow",
+                    background: "#6c5719",
                   }}
                 ></div>
-                <p>22 &deg; C</p>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                Sat
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "yellow",
-                  }}
-                ></div>
-                <p>22 &deg; C</p>
+                <p>19 &deg; C</p>
               </div>
             </div>
           </Tab>
           <Tab eventKey="profile" title="আর্দ্রতা">
             আর্দ্রতা
+          </Tab>
+          <Tab eventKey="aqi" title="এয়ার কোয়ালিটি ইনডেক্স">
+          এয়ার কোয়ালিটি ইনডেক্স
           </Tab>
         </Tabs>
       </Card.Body>

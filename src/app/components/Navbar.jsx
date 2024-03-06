@@ -9,6 +9,16 @@ import FormModal from "./FormModal";
 const NavbarComponent = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
+  const [lang,setLang] = useState('BN');
+  const handleSwitch = e =>{
+    const state = e.target.checked;
+    if(state){
+      setLang('BN')
+    }
+    else{
+      setLang('EN')
+    }
+  }
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" data-bs-theme="dark">
       <Container>
@@ -27,7 +37,8 @@ const NavbarComponent = () => {
 
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mx-auto">
-            <Button onClick={handleShow}
+            <Button
+              onClick={handleShow}
               aria-label="Default select example"
               className="rounded-pill bg-light text-dark"
             >
@@ -35,18 +46,20 @@ const NavbarComponent = () => {
             </Button>
           </Nav>
 
-          <Nav className="mx-auto">
-            <Form.Select
-              aria-label="Default select example"
-              className="rounded-pill bg-light text-dark text-center"
-            >
-              <option>ভাষা নির্বাচন করুন</option>
-              <option value='bn'>বাংলা</option>
-              <option value='en'>ইংরেজি</option>
-            </Form.Select>
+          <Nav className="ms-auto text-light">
+            <p className="text-light px-2">ভাষা নির্বাচন করুন</p>
+            <Form>
+              <Form.Check // prettier-ignore
+                type="switch"
+                id="custom-switch"
+                label={lang}
+                onChange={handleSwitch}
+                checked={lang == 'BN'}
+              />
+            </Form>
           </Nav>
 
-          <Nav className="m">
+          {/* <Nav className="m">
             <Nav.Link href="#deets">
               <div className="border rounded-circle bg-light text-dark py-1 px-2">
                 <FaRegBell size={15} />
@@ -68,7 +81,7 @@ const NavbarComponent = () => {
                 />
               </div>
             </Nav.Link>
-          </Nav>
+          </Nav> */}
         </Navbar.Collapse>
         <FormModal handleShow={handleShow} show={show} setShow={setShow} />
       </Container>

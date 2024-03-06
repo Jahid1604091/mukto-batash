@@ -22,33 +22,33 @@ function QualityIndexCard() {
           মাস্ক ব্যবহার করুন
         </Card.Text>
       </Card.Body>
-      <Table striped bordered hover variant="dark" size="sm" style={{fontSize:"12px",textAlign:"center"}}>
+      <Table striped bordered hover variant="dark" size="sm" style={{fontSize:"10px",textAlign:"center"}}>
       <thead>
-        <tr>
-          <th>Level</th>
+        <tr className="fs-6">
+          <th>Levels</th>
           <th>Value</th>
-          <th>Level</th>
+          <th>Levels</th>
           <th>Value</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Level 1</td>
-          <td>10</td>
-          <td>Level 1</td>
-          <td>10</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#00E400"}}></div>Good</td>
+          <td>0 - 50</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FF0000"}}></div>Unhealthy</td>
+          <td>151 - 200</td>
         </tr>
         <tr>
-          <td>Level 2</td>
-          <td>20</td>
-          <td>Level 2</td>
-          <td>20</td>
+        <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FFFF00"}}></div>Moderate</td>
+          <td>51 - 100</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#8F3F97"}}></div>Very Unhealthy</td>
+          <td>201 - 300</td>
         </tr>
         <tr>
-          <td>Level 3</td>
-          <td>30</td>
-          <td>Level 3</td>
-          <td>30</td>
+        <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FF7E00"}}></div>Unhealthy for senitive groups</td>
+          <td>101 - 150</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#7E0023"}}></div>Hazardous</td>
+          <td>301 or higher</td>
         </tr>
       </tbody>
       </Table>

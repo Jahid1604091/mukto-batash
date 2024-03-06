@@ -60,6 +60,15 @@ a {
   text-decoration: none;
 }
 
-select{
+select,input{
   cursor: pointer;
+}
+.nav-tabs .nav-item .nav-link{
+  color: white;
+  border: none;
+}
+.nav-tabs .nav-item .nav-link.active, .nav-link:hover,.nav-link:focus{
+  border: none;
+  background: none;
+  border-bottom: 1px solid #E3AE09;
 }

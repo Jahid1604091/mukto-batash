@@ -1,4 +1,3 @@
-
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -10,12 +9,12 @@ function FormModal({ show, setShow }) {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Information</Modal.Title>
+          <Modal.Title>আপনার তথ্য দিন </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Name</Form.Label>
+              <Form.Label>নাম</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
@@ -23,7 +22,7 @@ function FormModal({ show, setShow }) {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Phone</Form.Label>
+              <Form.Label>ফোন নম্বর </Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
@@ -31,7 +30,7 @@ function FormModal({ show, setShow }) {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
+              <Form.Label>ই-মেইল </Form.Label>
               <Form.Control
                 type="email"
                 placeholder="name@example.com"
@@ -42,17 +41,14 @@ function FormModal({ show, setShow }) {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Address</Form.Label>
+              <Form.Label>ঠিকানা</Form.Label>
               <Form.Control as="textarea" rows={3} />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          আবেদন করুন 
           </Button>
         </Modal.Footer>
       </Modal>
