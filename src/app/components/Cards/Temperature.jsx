@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import HighChartComponent from "../HighChartComponent";
 
 const Temperature = () => {

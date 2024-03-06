@@ -38,13 +38,11 @@ const NavbarComponent = () => {
           <Nav className="mx-auto">
             <Form.Select
               aria-label="Default select example"
-              className="rounded-pill bg-light text-dark"
+              className="rounded-pill bg-light text-dark text-center"
             >
               <option>ভাষা নির্বাচন করুন</option>
-              <option>বাংলা</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value='bn'>বাংলা</option>
+              <option value='en'>ইংরেজি</option>
             </Form.Select>
           </Nav>
 
