@@ -7,7 +7,7 @@ const GaugeComponent = dynamic(() => import("react-gauge-component"), {
   ssr: false,
 });
 
-const HumQuality = ({ title, width = "17rem", height = "18rem", margin }) => {
+const HumQuality = ({ title, width = "17rem", height = "18rem", margin,rht }) => {
   return (
     <Card style={{ width, margin, height }} className="rounded-4">
       <Card.Header
@@ -34,7 +34,7 @@ const HumQuality = ({ title, width = "17rem", height = "18rem", margin }) => {
           <Image src={humIcon} />
           <Card.Text className="my-4 text-end">
             <small>তাপমাত্রা</small>
-            <p className="fw-bold">২৯.৬ &deg; সেলসিয়াস</p>
+            <p className="fw-bold">{rht?.temperature} &deg; সেলসিয়াস</p>
           </Card.Text>
         </div>
 
@@ -42,7 +42,7 @@ const HumQuality = ({ title, width = "17rem", height = "18rem", margin }) => {
           <Image src={humIcon} />
           <Card.Text className="my-4 text-end">
             <small>আর্দ্রতা</small>
-            <p className="fw-bold">৬৯.৫ %</p>
+            <p className="fw-bold">{rht?.humidity} %</p>
           </Card.Text>
         </div>
       </Card.Body>

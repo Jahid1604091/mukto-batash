@@ -5,8 +5,8 @@ import {
   Marker,
   useJsApiLoader,
 } from "@react-google-maps/api";
-import { RequestType, fromLatLng, geocode, setDefaults } from "react-geocode";
-import FnLogo from "../../../public/assets/images/fn_logo.svg";
+import { RequestType, geocode, setDefaults } from "react-geocode";
+import { config } from "@/app.config";
 
 const containerStyle = {
   maxWidth: "400px",
@@ -21,14 +21,14 @@ const init_center = {
 };
 
 setDefaults({
-  key: "AIzaSyDYU_KJaxR7wBdU_Cv4eTyLCqqjgu4mIts", // Your API key here.
+  key: config.GOOGLE_MAP_API_KEY, // Your API key here.
   language: "en", // Default language for responses.
   // region: "es", // Default region for responses.
 });
 function Map({markers,selectedMarker,setSelectedLocationId,setSelectedMarker}) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDYU_KJaxR7wBdU_Cv4eTyLCqqjgu4mIts",
+    googleMapsApiKey: config.GOOGLE_MAP_API_KEY,
   });
 
   const [map, setMap] = React.useState(null);

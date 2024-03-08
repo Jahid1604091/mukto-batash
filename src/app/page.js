@@ -9,6 +9,8 @@ import GasQuality from "./components/Cards/GasQuality";
 import Map from "./components/Map";
 import Weather from "./components/Cards/Weather";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { config } from "@/app.config";
 
 
 export default function Home() {
@@ -46,6 +48,27 @@ export default function Home() {
     setSelectedLocation(selected_lcoation)
   }, [selectedLocationId])
 
+  const [aiqData,setAiqData] = useState(null);
+
+  async function fetchLocations() {
+    const {data} = await axios(`${config.BASE_URL}/locations?ln=bn`)
+    console.log(data)
+    //@after updating lng 
+    // setLocations(data)
+  }
+  useEffect(()=>{
+    fetchLocations()
+  },[])
+
+  async function fetchAIQData(location_id) {
+    const {data} = await axios(`${config.BASE_URL}/aiq-live?location=${location_id}&ln=en`)
+   setAiqData(data)
+  }
+  useEffect(()=>{
+    fetchAIQData(selectedLocationId)
+  },[selectedLocationId])
+
+
   return (
     // <main className={styles.main}>
     // </main>
@@ -55,13 +78,13 @@ export default function Home() {
         <Container>
           <Row className="align-items-center">
             <Col md={4}>
-              <QualityIndexCard />
+              <QualityIndexCard aiq={aiqData?.aiq} />
             </Col>
             <Col md={8}>
               <div className="d-flex justify-content-between">
-                <DustQuality title='ধূলিকণা' value={193} />
-                <HumQuality title='আর্দ্রতা ও তাপমাত্রা' value={233} />
-                <GasQuality title='ক্ষতিকারক গ্যাস' value={523} />
+                <DustQuality title='ধূলিকণা' airData={aiqData?.sensor_data?.air} />
+                <HumQuality title='আর্দ্রতা ও তাপমাত্রা' rht={aiqData?.sensor_data?.rht}/>
+                <GasQuality title='ক্ষতিকারক গ্যাস'  gasData={aiqData?.sensor_data}/>
               </div>
             </Col>
           </Row>

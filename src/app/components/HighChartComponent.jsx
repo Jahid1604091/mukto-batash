@@ -4,6 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 
 const HighChartComponent = ({ seriesData }) => {
   const chartComponent = useRef(null); // reference to chart obj
+  const dates = seriesData?.map(d=>d[0])
   const [chartOptions, setChartOptions] = useState({
     chart: {
       type: "area",
@@ -16,9 +17,11 @@ const HighChartComponent = ({ seriesData }) => {
       backgroundColor: 'none',
     },
     xAxis: {
-      type: "datetime",
+      type: "date",
+      categories: dates,
       labels: {
-        format: '{value:%I %p}',
+        // format: '{value:%Y %m %d}',
+        // format: '{value:%I %p}',
         style:{
           color: '#f0f0f0',
         }
@@ -51,9 +54,7 @@ const HighChartComponent = ({ seriesData }) => {
     title: {
       text: "",
     },
-    tooltip: {
-        pointFormat: '{series.name} had stockpiled <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
-    },
+
     legend: {
       enabled: false,
     },
@@ -101,6 +102,10 @@ const HighChartComponent = ({ seriesData }) => {
         },
       ],
     },
+    tooltip:{
+      pointFormat: 'Low: {point.y}'
+
+    }
   });
   const [chartConfig, setChartConfig] = useState(chartOptions);
 

@@ -1,8 +1,21 @@
 import Image from "next/image";
 import { Card, Table } from "react-bootstrap";
 import mask from "../../../../public/assets/images/mask.svg";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { config } from "@/app.config";
 
-function QualityIndexCard() {
+function QualityIndexCard({aiq}) {
+  const [aiqData,setAiqData] = useState([]);
+  async function fetchAIQStandards() {
+    const {data} = await axios(`${config.BASE_URL}/aiq-standards?ln=bn`)
+   setAiqData(data)
+    //@after updating lng 
+    // setLocations(data)
+  }
+  useEffect(()=>{
+    fetchAIQStandards()
+  },[])
   return (
     <Card style={{ width: "25rem", height: "23rem" }} className="rounded-4">
       <Card.Header
@@ -13,7 +26,7 @@ function QualityIndexCard() {
         <p style={{ width: "15rem" }} className="text-wrap text-center">
           এয়ার কোয়ালিটি ইনডেক্স
         </p>{" "}
-        <p className="display-6 fw-bold">৬৯৮</p>{" "}
+        <p className="display-6 fw-bold">{aiq}</p>{" "}
       </Card.Header>
       <Card.Body className="d-flex">
         <Image src={mask} alt="mask" width={60} height={60} className="mx-3" />
@@ -22,7 +35,7 @@ function QualityIndexCard() {
           মাস্ক ব্যবহার করুন
         </Card.Text>
       </Card.Body>
-      <Table striped bordered hover variant="dark" size="sm" style={{fontSize:"10px",textAlign:"center"}}>
+      <Table striped bordered hover variant="dark" size="sm" style={{fontSize:"9px",textAlign:"center"}}>
       <thead>
         <tr className="fs-6">
           <th>Levels</th>
@@ -33,22 +46,22 @@ function QualityIndexCard() {
       </thead>
       <tbody>
         <tr>
-          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#00E400"}}></div>Good</td>
-          <td>0 - 50</td>
-          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FF0000"}}></div>Unhealthy</td>
-          <td>151 - 200</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#00E400"}}></div>{aiqData[0]?.level}</td>
+          <td>{aiqData[0]?.value}</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FF0000"}}></div>{aiqData[3]?.level}</td>
+          <td>{aiqData[3]?.value}</td>
         </tr>
         <tr>
-        <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FFFF00"}}></div>Moderate</td>
-          <td>51 - 100</td>
-          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#8F3F97"}}></div>Very Unhealthy</td>
-          <td>201 - 300</td>
+        <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FFFF00"}}></div>{aiqData[1]?.level}</td>
+          <td>{aiqData[1]?.value}</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#8F3F97"}}></div>{aiqData[4]?.level}</td>
+          <td>{aiqData[4]?.value}</td>
         </tr>
         <tr>
-        <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FF7E00"}}></div>Unhealthy for senitive groups</td>
-          <td>101 - 150</td>
-          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#7E0023"}}></div>Hazardous</td>
-          <td>301 or higher</td>
+        <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#FF7E00"}}></div>{aiqData[2]?.level}</td>
+          <td>{aiqData[2]?.value}</td>
+          <td className="d-flex align-items-center justify-content-start"> <div style={{width:"15px",height:"15px",borderRadius:"100%",margin:"5px",background:"#7E0023"}}></div>{aiqData[5]?.level}</td>
+          <td>{aiqData[5]?.value}</td>
         </tr>
       </tbody>
       </Table>

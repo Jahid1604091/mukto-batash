@@ -10,6 +10,7 @@ const GasQuality = ({
   width = "17rem",
   height = "18rem",
   margin,
+  gasData
 }) => {
   return (
     <Card style={{ width, margin, height }} className="rounded-4">
@@ -36,7 +37,7 @@ const GasQuality = ({
         <div className="d-flex" style={{borderBottom:"1px solid #B4B1B1"}}>
           <GaugeComponent
             style={{ width: "120px",height:"80px" }}
-            value={30}
+            value={gasData?.co}
             type="semicircle"
             labels={{
               valueLabel: {
@@ -88,13 +89,13 @@ const GasQuality = ({
           />
           <Card.Text className="my-4">
             <small>কার্বন মনোক্সাইড </small>
-            <p className="fw-bold">২৫ পিপিএম</p>
+            <p className="fw-bold">{gasData?.co} পিপিএম</p>
           </Card.Text>
         </div>
         <div className="d-flex" >
           <GaugeComponent
             style={{ width: "120px",height:"80px" }}
-            value={30}
+            value={gasData?.co2}
             type="semicircle"
             labels={{
               valueLabel: {
@@ -146,7 +147,7 @@ const GasQuality = ({
           />
           <Card.Text className="my-4">
             <small>কার্বন ডাই অক্সাইড </small>
-            <p className="fw-bold">৬৯৮ পিপিএম</p>
+            <p className="fw-bold">{gasData?.co2} পিপিএম</p>
           </Card.Text>
         </div>
       

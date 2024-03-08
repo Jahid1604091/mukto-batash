@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Tab, Tabs } from "react-bootstrap";
 import Temperature from "./Temperature";
+import { config } from "@/app.config";
+import TempForecast from "../TempForecast";
+import axios from "axios";
 
 const Weather = () => {
   const [key, setKey] = useState("temperature");
+  const [weatherData,setWeatherData] = useState([]);
+
+  async function fetchWeatherData() {
+    const {data} = await axios(`${config.BASE_URL}/weather-forecast`)
+   setWeatherData(data)
+  }
+  useEffect(()=>{
+    fetchWeatherData()
+  },[])
+
   return (
     <Card className="rounded-4 bg-dark text-light">
       <Card.Body>
@@ -14,99 +27,18 @@ const Weather = () => {
           onSelect={(k) => setKey(k)}
         >
           <Tab eventKey="temperature" title="তাপমাত্রা">
-            <Temperature />
-            <div className="d-flex justify-content-around">
-              <div className="d-flex flex-column align-items-center">
-                Sat
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "#E3AE09",
-                  }}
-                ></div>
-                <p>22 &deg; C</p>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                Sun
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "yellow",
-                  }}
-                ></div>
-                <p>25 &deg; C</p>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                Mon
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "#eebf31",
-                  }}
-                ></div>
-                <p>21 &deg; C</p>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                Tue
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "yellow",
-                  }}
-                ></div>
-                <p>25 &deg; C</p>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                Wed
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "#E3AE09",
-                  }}
-                ></div>
-                <p>23 &deg; C</p>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                Thu
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "#E3AE09",
-                  }}
-                ></div>
-                <p>22 &deg; C</p>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                Fri
-                <div
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "100%",
-                    background: "#6c5719",
-                  }}
-                ></div>
-                <p>19 &deg; C</p>
-              </div>
-            </div>
+            <Temperature  weatherData={weatherData} />
+            <TempForecast weatherData={weatherData}/>
           </Tab>
-          <Tab eventKey="profile" title="আর্দ্রতা">
+
+
+          <Tab eventKey="humidity" title="আর্দ্রতা">
             আর্দ্রতা
+            <TempForecast weatherData={weatherData}/>
           </Tab>
           <Tab eventKey="aqi" title="এয়ার কোয়ালিটি ইনডেক্স">
           এয়ার কোয়ালিটি ইনডেক্স
+          <TempForecast weatherData={weatherData}/>
           </Tab>
         </Tabs>
       </Card.Body>
