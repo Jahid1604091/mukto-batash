@@ -4,18 +4,20 @@ import Temperature from "./Temperature";
 import { config } from "@/app.config";
 import TempForecast from "../TempForecast";
 import axios from "axios";
+import Humidity from "./Humidity";
+import AIQ from "./AIQ";
 
 const Weather = () => {
   const [key, setKey] = useState("temperature");
-  const [weatherData,setWeatherData] = useState([]);
+  const [weatherData, setWeatherData] = useState([]);
 
   async function fetchWeatherData() {
-    const {data} = await axios(`${config.BASE_URL}/weather-forecast`)
-   setWeatherData(data)
+    const { data } = await axios(`${config.BASE_URL}/weather-forecast`);
+    setWeatherData(data);
   }
-  useEffect(()=>{
-    fetchWeatherData()
-  },[])
+  useEffect(() => {
+    fetchWeatherData();
+  }, []);
 
   return (
     <Card className="rounded-4 bg-dark text-light">
@@ -27,18 +29,17 @@ const Weather = () => {
           onSelect={(k) => setKey(k)}
         >
           <Tab eventKey="temperature" title="তাপমাত্রা">
-            <Temperature  weatherData={weatherData} />
-            <TempForecast weatherData={weatherData}/>
+            <Temperature weatherData={weatherData} />
+            <TempForecast weatherData={weatherData} />
           </Tab>
-
 
           <Tab eventKey="humidity" title="আর্দ্রতা">
-            আর্দ্রতা
-            <TempForecast weatherData={weatherData}/>
+            <Humidity weatherData={weatherData} />
+            <TempForecast weatherData={weatherData} />
           </Tab>
           <Tab eventKey="aqi" title="এয়ার কোয়ালিটি ইনডেক্স">
-          এয়ার কোয়ালিটি ইনডেক্স
-          <TempForecast weatherData={weatherData}/>
+            <AIQ weatherData={weatherData} />
+            <TempForecast weatherData={weatherData} />
           </Tab>
         </Tabs>
       </Card.Body>

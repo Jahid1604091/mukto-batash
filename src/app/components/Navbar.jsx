@@ -49,7 +49,7 @@ const NavbarComponent = () => {
           <Nav className="ms-auto text-light">
             <p className="text-light px-2">ভাষা নির্বাচন করুন</p>
             <Form>
-              <Form.Check // prettier-ignore
+              <Form.Check
                 type="switch"
                 id="custom-switch"
                 label={lang}

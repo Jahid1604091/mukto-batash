@@ -25,7 +25,7 @@ const SubNavbar = ({
           
           <Col md={2}>
               <select name="" id="" onChange={handleChange}  className="rounded-pill bg-dark text-light px-5 py-2">
-                {locations.map((loc) => (
+                {locations?.map((loc) => (
                   <option key={loc.id} value={loc.id} selected={loc.id == selectedLocationId}>{loc.location}</option>
                 ))}
               </select>

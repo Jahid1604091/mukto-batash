@@ -1,15 +1,11 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import humIcon from "../../../../public/assets/images/hum.svg";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-const GaugeComponent = dynamic(() => import("react-gauge-component"), {
-  ssr: false,
-});
 
-const HumQuality = ({ title, width = "17rem", height = "18rem", margin,rht }) => {
+const HumQuality = ({ title,  width = "15rem", height = "18rem", margin,rht }) => {
   return (
-    <Card style={{ width, margin, height }} className="rounded-4">
+    <Card style={{  margin, height }} className="rounded-4">
       <Card.Header
         as="h6"
         style={{ background: "#137E1D" }}

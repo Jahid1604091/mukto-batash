@@ -15,15 +15,10 @@ const containerStyle = {
   borderRadius: "20px",
 };
 
-const init_center = {
-  lat: 22.726385,
-  lng: 60.421502,
-};
-
 setDefaults({
   key: config.GOOGLE_MAP_API_KEY, // Your API key here.
   language: "en", // Default language for responses.
-  // region: "es", // Default region for responses.
+
 });
 function Map({markers,selectedMarker,setSelectedLocationId,setSelectedMarker}) {
   const { isLoaded } = useJsApiLoader({
@@ -32,34 +27,8 @@ function Map({markers,selectedMarker,setSelectedLocationId,setSelectedMarker}) {
   });
 
   const [map, setMap] = React.useState(null);
-  const [center, setCenter] = useState(init_center);
-  // const [markers, setMarkers] = useState([
-  //   {
-  //     id: 58,
-  //     location: "Motijheel",
-  //     coordinates: {
-  //       lat: 23.726385,
-  //       lng: 90.421502,
-  //     },
-  //   },
-  //   {
-  //     id: 59,
-  //     location: "Gulshan",
-  //     coordinates: {
-  //       lat: 23.794615,
-  //       lng: 90.414194,
-  //     },
-  //   },
-  //   {
-  //     id: 60,
-  //     location: "Malibagh",
-  //     coordinates: {
-  //       lat: 23.748,
-  //       lng: 90.4122,
-  //     },
-  //   },
-  // ]);
-  // const [selectedMarker, setSelectedMarker] = useState("");
+  const [center, setCenter] = useState(selectedMarker[0]);
+  
   let infoWindow;
 
   useEffect(() => {
@@ -96,8 +65,6 @@ function Map({markers,selectedMarker,setSelectedLocationId,setSelectedMarker}) {
                     acc.country = component.long_name;
                   return acc;
                 }, {});
-              console.log(city, state, country);
-              console.log(address);
             })
             .catch(console.error);
         },
@@ -109,17 +76,6 @@ function Map({markers,selectedMarker,setSelectedLocationId,setSelectedMarker}) {
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map?.getCenter());
     }
-  }, []);
-
-  const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!!
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-    setMap(map);
-  }, []);
-
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null);
   }, []);
 
 const handleMarkerClick = (marker) =>{
@@ -145,7 +101,7 @@ const handleMarkerClick = (marker) =>{
         );
       })}
       {selectedMarker && (
-        <InfoWindow position={selectedMarker?.coordinates} onCloseClick={() => setSelectedMarker("")} >
+        <InfoWindow position={selectedMarker?.coordinates} onCloseClick={() => setSelectedMarker(selectedMarker)} >
           <>
             <p className="text-dark">{selectedMarker?.location}</p>
           </>

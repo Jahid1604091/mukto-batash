@@ -18,21 +18,14 @@ export const CustomTooltip = ({ active, payload, label }) => {
     );
 };
 
-const Temperature = ({ weatherData }) => {
-  const dataWithAverage = weatherData?.map((entry) => ({
-    ...entry,
-    temperature: {
-      ...entry.temperature,
-      average: (entry.temperature.high + entry.temperature.low) / 2,
-    },
-  }));
+const Humidity = ({ weatherData }) => {
 
   return (
     <ResponsiveContainer width="100%" height={120}>
       <AreaChart
         width={730}
         height={110}
-        data={dataWithAverage}
+        data={weatherData}
         margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
       >
         <defs>
@@ -46,7 +39,7 @@ const Temperature = ({ weatherData }) => {
         <Tooltip content={<CustomTooltip/>} />
         <Area
           type="monotone"
-          dataKey="temperature.average"
+          dataKey="humidity"
           stroke="#d9ad28"
           fillOpacity={1}
           strokeWidth={2}
@@ -58,4 +51,4 @@ const Temperature = ({ weatherData }) => {
   );
 };
 
-export default Temperature;
+export default Humidity;

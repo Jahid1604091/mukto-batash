@@ -1,19 +1,16 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import dynamic from "next/dynamic";
-const GaugeComponent = dynamic(() => import("react-gauge-component"), {
-  ssr: false,
-});
+import ReactSpeedometer from "react-d3-speedometer";
 
 const GasQuality = ({
   title,
-  width = "17rem",
+  width = "15rem",
   height = "18rem",
   margin,
-  gasData
+  gasData,
 }) => {
   return (
-    <Card style={{ width, margin, height }} className="rounded-4">
+    <Card style={{ margin, height }} className="rounded-4">
       <Card.Header
         as="h6"
         style={{ background: "#137E1D" }}
@@ -33,124 +30,64 @@ const GasQuality = ({
       </Card.Header>
 
       <Card.Body className="p-0 m-0">
-        
-        <div className="d-flex" style={{borderBottom:"1px solid #B4B1B1"}}>
-          <GaugeComponent
-            style={{ width: "120px",height:"80px" }}
+        <div
+          className="d-flex justify-content-around align-items-center"
+          style={{ borderBottom: "1px solid #B4B1B1" }}
+        >
+          <ReactSpeedometer
+            labelFontSize='10'
+            valueTextFontSize='0'
+            width={120}
+            height={110}
+            ringWidth={10}
+            minValue={0}
+            maxValue={2000}
+            segments={6}
             value={gasData?.co}
-            type="semicircle"
-            labels={{
-              valueLabel: {
-                formatTextValue: (value) => value + "",
-                style: {
-                  fill: "#000",
-                  fontSize: "45px",
-                  textShadow: "none",
-                  fontWeight: "700",
-                },
-              },
-              tickLabels: {
-                type: "outer",
-                ticks: [
-                  { value: 20 },
-                  { value: 40 },
-                  { value: 60 },
-                  { value: 80 },
-                  { value: 100 },
-                ],
-                defaultTickValueConfig: {
-                  style: { fill: "#000", fontSize: "16px" },
-                  hide: true,
-                },
-                defaultTickLineConfig: {
-                  color: "#000",
-                  width: 1,
-                  hide: true,
-                },
-                hide: true,
-              },
-            }}
-            arc={{
-              colorArray: ["#5BE12C", "#EA4228"],
-              subArcs: [{ limit: 10 }, {}, {}, {}, {}],
-              padding: 0.01,
-              width: 0.2,
-              cornerRadius: 0,
-              nbSubArcs: 0,
-            }}
-            pointer={{
-              elastic: true,
-              animationDelay: 0,
-              color: "#e68383",
-              width: 10,
-              length: 0.8,
-              type: "needle",
-            }}
+            segmentColors={[
+              "#00E400",
+              "#FFFF00",
+              "#FF7E00",
+              "#FF0000",
+              "#8F3F97",
+              "#7E0023",
+            ]}
           />
-          <Card.Text className="my-4">
+          <Card.Text className="p-0 m-auto">
             <small>কার্বন মনোক্সাইড </small>
             <p className="fw-bold">{gasData?.co} পিপিএম</p>
           </Card.Text>
         </div>
-        <div className="d-flex" >
-          <GaugeComponent
-            style={{ width: "120px",height:"80px" }}
+     
+        <div
+          className="d-flex justify-content-around"
+        
+        >
+          <ReactSpeedometer
+            labelFontSize='10'
+            valueTextFontSize='0'
+            paddingVertical={10}
+            width={120}
+            height={110}
+            ringWidth={10}
             value={gasData?.co2}
-            type="semicircle"
-            labels={{
-              valueLabel: {
-                formatTextValue: (value) => value + "",
-                style: {
-                  fill: "#000",
-                  fontSize: "45px",
-                  textShadow: "none",
-                  fontWeight: "700",
-                },
-              },
-              tickLabels: {
-                type: "outer",
-                ticks: [
-                  { value: 20 },
-                  { value: 40 },
-                  { value: 60 },
-                  { value: 80 },
-                  { value: 100 },
-                ],
-                defaultTickValueConfig: {
-                  style: { fill: "#000", fontSize: "16px" },
-                  hide: true,
-                },
-                defaultTickLineConfig: {
-                  color: "#000",
-                  width: 1,
-                  hide: true,
-                },
-                hide: true,
-              },
-            }}
-            arc={{
-              colorArray: ["#5BE12C", "#EA4228"],
-              subArcs: [{ limit: 10 }, {}, {}, {}, {}],
-              padding: 0.01,
-              width: 0.2,
-              cornerRadius: 0,
-              nbSubArcs: 0,
-            }}
-            pointer={{
-              elastic: true,
-              animationDelay: 0,
-              color: "#e68383",
-              width: 10,
-              length: 0.8,
-              type: "needle",
-            }}
+            minValue={0}
+            maxValue={2000}
+            segments={6}
+            segmentColors={[
+              "#00E400",
+              "#FFFF00",
+              "#FF7E00",
+              "#FF0000",
+              "#8F3F97",
+              "#7E0023",
+            ]}
           />
-          <Card.Text className="my-4">
-            <small>কার্বন ডাই অক্সাইড </small>
+          <Card.Text className="p-0 m-auto">
+            <small>কার্বন ডাই অক্সাইড  </small>
             <p className="fw-bold">{gasData?.co2} পিপিএম</p>
           </Card.Text>
         </div>
-      
       </Card.Body>
     </Card>
   );
