@@ -1,3 +1,4 @@
+import { convertToBanglaNumber } from "@/app/utils/helpers";
 import React from "react";
 import { Card } from "react-bootstrap";
 import ReactSpeedometer from "react-d3-speedometer";
@@ -9,6 +10,11 @@ const DustQuality = ({
   margin,
   airData,
 }) => {
+const maxValue = 300;
+const clippedValuePm1 = parseInt(Math.min(airData?.pm1, maxValue));
+const clippedValuePm25 = parseInt(Math.min(airData && airData['pm2.5'], maxValue));
+const clippedValuePm10 = parseInt(Math.min(airData?.pm10, maxValue));
+
   return (
     <Card style={{ margin, height }} className="rounded-4">
       <Card.Header
@@ -40,9 +46,11 @@ const DustQuality = ({
             width={120}
             height={80}
             ringWidth={10}
-            value={airData?.pm1}
+            value={clippedValuePm1}
             minValue={0}
-            maxValue={2000}
+            maxValue={maxValue}
+            customSegmentStops={[0, 50, 100, 150, 200, 250, maxValue]}
+            maxSegmentLabels={maxValue}
             segments={6}
             segmentColors={[
               "#00E400",
@@ -55,7 +63,7 @@ const DustQuality = ({
           />
           <Card.Text className="p-0 m-auto">
             <small>পি এম ১</small>
-            <p className="fw-bold">{airData?.pm1} পিপিএম</p>
+            <p className="fw-bold">{convertToBanglaNumber(airData?.pm1)} পিপিএম</p>
           </Card.Text>
         </div>
 
@@ -69,10 +77,11 @@ const DustQuality = ({
             width={120}
             height={80}
             ringWidth={10}
-            value={airData && airData["pm2.5"]}
+            value={clippedValuePm25}
             minValue={0}
-            maxValue={2000}
-            segments={6}
+            maxValue={maxValue}
+            customSegmentStops={[0, 50, 100, 150, 200, 250, maxValue]}
+            maxSegmentLabels={maxValue}
             segmentColors={[
               "#00E400",
               "#FFFF00",
@@ -84,7 +93,7 @@ const DustQuality = ({
           />
           <Card.Text className="p-0 m-auto">
             <small>পি এম ২.৫</small>
-            <p className="fw-bold">{airData && airData["pm2.5"]} পিপিএম</p>
+            <p className="fw-bold">{convertToBanglaNumber(airData && airData["pm2.5"])} পিপিএম</p>
           </Card.Text>
         </div>
 
@@ -95,9 +104,11 @@ const DustQuality = ({
             width={120}
             height={80}
             ringWidth={10}
-            value={airData?.pm10}
+            value={clippedValuePm10}
             minValue={0}
-            maxValue={2000}
+            maxValue={maxValue}
+            customSegmentStops={[0, 50, 100, 150, 200, 250, maxValue]}
+            maxSegmentLabels={maxValue}
             segments={6}
             segmentColors={[
               "#00E400",
@@ -110,7 +121,7 @@ const DustQuality = ({
           />
           <Card.Text className="p-0 m-auto">
             <small>পি এম ১০</small>
-            <p className="fw-bold">{airData?.pm10} পিপিএম</p>
+            <p className="fw-bold">{convertToBanglaNumber(airData?.pm10)} পিপিএম</p>
           </Card.Text>
         </div>
       </Card.Body>

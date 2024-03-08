@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import humIcon from "../../../../public/assets/images/hum.svg";
 import Image from "next/image";
+import { convertToBanglaNumber } from "@/app/utils/helpers";
 
 const HumQuality = ({ title,  width = "15rem", height = "18rem", margin,rht }) => {
   return (
@@ -30,7 +31,7 @@ const HumQuality = ({ title,  width = "15rem", height = "18rem", margin,rht }) =
           <Image src={humIcon} />
           <Card.Text className="my-4 text-end">
             <small>তাপমাত্রা</small>
-            <p className="fw-bold">{rht?.temperature} &deg; সেলসিয়াস</p>
+            <p className="fw-bold">{convertToBanglaNumber(rht?.temperature)} &deg; সেলসিয়াস</p>
           </Card.Text>
         </div>
 
@@ -38,7 +39,7 @@ const HumQuality = ({ title,  width = "15rem", height = "18rem", margin,rht }) =
           <Image src={humIcon} />
           <Card.Text className="my-4 text-end">
             <small>আর্দ্রতা</small>
-            <p className="fw-bold">{rht?.humidity} %</p>
+            <p className="fw-bold">{convertToBanglaNumber(rht?.humidity)} %</p>
           </Card.Text>
         </div>
       </Card.Body>

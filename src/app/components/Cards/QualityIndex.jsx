@@ -4,8 +4,31 @@ import mask from "../../../../public/assets/images/mask.svg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { config } from "@/app.config";
+import { convertToBanglaNumber } from "@/app/utils/helpers";
 
 function QualityIndexCard({ aiq }) {
+
+  const getBgColor = (value) =>{
+    if(value >0 && value <=50){
+      return "#00E400"
+    }
+    else if(value >50 && value <=100){
+      return "#FFFF00"
+    }
+    else if(value >100 && value <=150){
+      return "#FF7E00"
+    }
+    else if(value >150 && value <=200){
+      return "#FF0000"
+    }
+    else if(value >200 && value <=300){
+      return "#8F3F97"
+    }
+    else {
+      return "#7E0023"
+    }
+  }
+
   const [aiqData, setAiqData] = useState([]);
   async function fetchAIQStandards() {
     const { data } = await axios(`${config.BASE_URL}/aiq-standards?ln=bn`);
@@ -14,17 +37,19 @@ function QualityIndexCard({ aiq }) {
   useEffect(() => {
     fetchAIQStandards();
   }, []);
+
+
   return (
     <Card style={{ width: "25rem", height: "23rem" }} className="rounded-4">
       <Card.Header
-        style={{ background: "#B50808" }}
+        style={{ background: getBgColor(aiq) }}
         as="h4"
         className="fw-bold d-flex justify-content-between align-items-center rounded-top-4 text-light"
       >
         <p style={{ width: "15rem" }} className="text-wrap text-center">
           এয়ার কোয়ালিটি ইনডেক্স
         </p>{" "}
-        <p className="display-6 fw-bold">{aiq}</p>{" "}
+        <p className="display-6 fw-bold">{convertToBanglaNumber(aiq)}</p>{" "}
       </Card.Header>
       <Card.Body className="d-flex">
         <Image src={mask} alt="mask" width={60} height={60} className="mx-3" />

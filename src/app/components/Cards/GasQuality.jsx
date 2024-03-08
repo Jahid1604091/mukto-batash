@@ -1,3 +1,4 @@
+import { convertToBanglaNumber } from "@/app/utils/helpers";
 import React from "react";
 import { Card } from "react-bootstrap";
 import ReactSpeedometer from "react-d3-speedometer";
@@ -9,6 +10,9 @@ const GasQuality = ({
   margin,
   gasData,
 }) => {
+  const maxValue = 300;
+const clippedValueCO = parseInt(Math.min(gasData?.co, maxValue));
+const clippedValueCO2 = parseInt(Math.min(gasData?.co2, maxValue));
   return (
     <Card style={{ margin, height }} className="rounded-4">
       <Card.Header
@@ -41,9 +45,11 @@ const GasQuality = ({
             height={110}
             ringWidth={10}
             minValue={0}
-            maxValue={2000}
+            maxValue={maxValue}
+            customSegmentStops={[0, 50, 100, 150, 200, 250, maxValue]}
+            maxSegmentLabels={maxValue}
             segments={6}
-            value={gasData?.co}
+            value={clippedValueCO}
             segmentColors={[
               "#00E400",
               "#FFFF00",
@@ -55,7 +61,7 @@ const GasQuality = ({
           />
           <Card.Text className="p-0 m-auto">
             <small>কার্বন মনোক্সাইড </small>
-            <p className="fw-bold">{gasData?.co} পিপিএম</p>
+            <p className="fw-bold">{convertToBanglaNumber(gasData?.co)} পিপিএম</p>
           </Card.Text>
         </div>
      
@@ -70,9 +76,11 @@ const GasQuality = ({
             width={120}
             height={110}
             ringWidth={10}
-            value={gasData?.co2}
+            value={clippedValueCO2}
             minValue={0}
-            maxValue={2000}
+            maxValue={maxValue}
+            customSegmentStops={[0, 50, 100, 150, 200, 250, maxValue]}
+            maxSegmentLabels={maxValue}
             segments={6}
             segmentColors={[
               "#00E400",
@@ -85,7 +93,7 @@ const GasQuality = ({
           />
           <Card.Text className="p-0 m-auto">
             <small>কার্বন ডাই অক্সাইড  </small>
-            <p className="fw-bold">{gasData?.co2} পিপিএম</p>
+            <p className="fw-bold">{convertToBanglaNumber(gasData?.co2)} পিপিএম</p>
           </Card.Text>
         </div>
       </Card.Body>
