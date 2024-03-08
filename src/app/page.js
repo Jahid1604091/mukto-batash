@@ -14,48 +14,26 @@ import { config } from "@/app.config";
 
 
 export default function Home() {
-  const [locations, setLocations] = useState([
-    // {
-    //   id: 58,
-    //   location: "Motijheel",
-    //   coordinates: {
-    //     lat: 23.72638500,
-    //     lng: 90.42150200,
-    //   },
-    // },
-    // {
-    //   id: 59,
-    //   location: "Gulshan",
-    //   coordinates: {
-    //     lat: 23.79461500,
-    //     lng: 90.41419400,
-    //   },
-    // },
-    // {
-    //   id: 60,
-    //   location: "Malibagh",
-    //   coordinates: {
-    //     lat: 23.748,
-    //     lng: 90.4122,
-    //   },
-    // },
-  ])
+  const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedLocationId, setSelectedLocationId] = useState(null);
   const [aiqData, setAiqData] = useState(null);
 
   async function fetchLocations() {
     const { data } = await axios(`${config.BASE_URL}/locations?ln=bn`)
-    const locationsWithIntegerCoordinates = data.map(location => ({
+    const locationsWithIntegerCoordinates = data?.map(location => ({
       ...location,
       coordinates: {
-        lat: parseFloat(location.coordinates.lat),
-        lng: parseFloat(location.coordinates.lng)
+        lat: parseFloat(location?.coordinates.lat),
+        lng: parseFloat(location?.coordinates.lng)
       }
     }));
-    setLocations(locationsWithIntegerCoordinates)
-    setSelectedLocation(locationsWithIntegerCoordinates[0])
-    setSelectedLocationId(locationsWithIntegerCoordinates[0].id)
+
+    if (locationsWithIntegerCoordinates) {
+      setLocations(locationsWithIntegerCoordinates)
+      setSelectedLocation(locationsWithIntegerCoordinates[0])
+      setSelectedLocationId(locationsWithIntegerCoordinates[0]?.id)
+    }
   }
   useEffect(() => {
     fetchLocations()
@@ -64,16 +42,16 @@ export default function Home() {
 
   useEffect(() => {
     const selected_lcoation = locations?.find(loc => loc.id == selectedLocationId);
-    setSelectedLocation(selected_lcoation)
+   selected_lcoation && setSelectedLocation(selected_lcoation)
   }, [locations, selectedLocationId])
 
 
-  async function fetchAIQData() {
+  async function fetchAIQData(selectedLocationId) {
     const { data } = selectedLocationId && await axios(`${config.BASE_URL}/aiq-live?location=${selectedLocationId}&ln=en`)
-    setAiqData(data)
+    data && setAiqData(data)
   }
   useEffect(() => {
-    fetchAIQData()
+    fetchAIQData(selectedLocationId)
   }, [selectedLocationId])
 
 
@@ -85,8 +63,8 @@ export default function Home() {
           <Col xl={4}>
             <QualityIndexCard aiq={aiqData?.aiq} />
           </Col>
-          <Col xl={8}>
-            <Row className=" align-items-center">
+         <Col xl={8}>
+            <Row className="align-items-center">
               <Col xl={4}>
                 <DustQuality title='ধূলিকণা' airData={aiqData?.sensor_data?.air} />
               </Col>
@@ -95,10 +73,8 @@ export default function Home() {
               </Col>
               <Col xl={4}>
                 <GasQuality title='ক্ষতিকারক গ্যাস' gasData={aiqData?.sensor_data} />
-
               </Col>
             </Row>
-
           </Col>
         </Row>
 

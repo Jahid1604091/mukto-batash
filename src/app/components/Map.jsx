@@ -18,17 +18,24 @@ const containerStyle = {
 setDefaults({
   key: config.GOOGLE_MAP_API_KEY, // Your API key here.
   language: "en", // Default language for responses.
-
 });
-function Map({markers,selectedMarker,setSelectedLocationId,setSelectedMarker}) {
+function Map({
+  markers,
+  selectedMarker,
+  setSelectedLocationId,
+  setSelectedMarker,
+}) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: config.GOOGLE_MAP_API_KEY,
   });
 
   const [map, setMap] = React.useState(null);
-  const [center, setCenter] = useState(selectedMarker[0]);
-  
+  const [center, setCenter] = useState({
+    lat: 23.77817600,
+    lng: 90.37498300,
+  });
+
   let infoWindow;
 
   useEffect(() => {
@@ -78,10 +85,10 @@ function Map({markers,selectedMarker,setSelectedLocationId,setSelectedMarker}) {
     }
   }, []);
 
-const handleMarkerClick = (marker) =>{
-  setSelectedMarker(marker)
-  setSelectedLocationId(marker.id)
-}
+  const handleMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+    setSelectedLocationId(marker.id);
+  };
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -101,7 +108,10 @@ const handleMarkerClick = (marker) =>{
         );
       })}
       {selectedMarker && (
-        <InfoWindow position={selectedMarker?.coordinates} onCloseClick={() => setSelectedMarker(selectedMarker)} >
+        <InfoWindow
+          position={selectedMarker?.coordinates}
+          onCloseClick={() => setSelectedMarker(selectedMarker)}
+        >
           <>
             <p className="text-dark">{selectedMarker?.location}</p>
           </>

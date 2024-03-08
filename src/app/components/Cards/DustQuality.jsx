@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import ReactSpeedometer from "react-d3-speedometer/slim";
+import ReactSpeedometer from "react-d3-speedometer";
 
 const DustQuality = ({
   title,
@@ -10,7 +10,7 @@ const DustQuality = ({
   airData,
 }) => {
   return (
-    <Card style={{  margin, height }} className="rounded-4">
+    <Card style={{ margin, height }} className="rounded-4">
       <Card.Header
         as="h6"
         style={{ background: "#137E1D" }}
@@ -35,8 +35,8 @@ const DustQuality = ({
           style={{ borderBottom: "1px solid #B4B1B1" }}
         >
           <ReactSpeedometer
-            labelFontSize='10'
-            valueTextFontSize='0'
+            labelFontSize="10"
+            valueTextFontSize="0"
             width={120}
             height={80}
             ringWidth={10}
@@ -64,12 +64,12 @@ const DustQuality = ({
           style={{ borderBottom: "1px solid #B4B1B1" }}
         >
           <ReactSpeedometer
-             labelFontSize='10'
-             valueTextFontSize='0'
+            labelFontSize="10"
+            valueTextFontSize="0"
             width={120}
             height={80}
             ringWidth={10}
-            value={airData && airData['pm2.5']}
+            value={airData && airData["pm2.5"]}
             minValue={0}
             maxValue={2000}
             segments={6}
@@ -84,16 +84,14 @@ const DustQuality = ({
           />
           <Card.Text className="p-0 m-auto">
             <small>পি এম ২.৫</small>
-            <p className="fw-bold">{airData && airData['pm2.5']} পিপিএম</p>
+            <p className="fw-bold">{airData && airData["pm2.5"]} পিপিএম</p>
           </Card.Text>
         </div>
 
-        <div
-          className="d-flex justify-content-around"
-        >
+        <div className="d-flex justify-content-around">
           <ReactSpeedometer
-           labelFontSize='10'
-           valueTextFontSize='0'
+            labelFontSize="10"
+            valueTextFontSize="0"
             width={120}
             height={80}
             ringWidth={10}
@@ -109,7 +107,6 @@ const DustQuality = ({
               "#8F3F97",
               "#7E0023",
             ]}
-
           />
           <Card.Text className="p-0 m-auto">
             <small>পি এম ১০</small>
