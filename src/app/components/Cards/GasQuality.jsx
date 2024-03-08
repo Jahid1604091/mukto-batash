@@ -2,19 +2,24 @@ import { convertToBanglaNumber } from "@/app/utils/helpers";
 import React from "react";
 import { Card } from "react-bootstrap";
 import ReactSpeedometer from "react-d3-speedometer";
+import Loader from "../Loader";
 
 const GasQuality = ({
   title,
   width = "15rem",
-  height = "18rem",
+  height = "20rem",
   margin,
   gasData,
+  aiqLoader,
 }) => {
   const maxValue = 300;
-const clippedValueCO = parseInt(Math.min(gasData?.co, maxValue));
-const clippedValueCO2 = parseInt(Math.min(gasData?.co2, maxValue));
+  const clippedValueCO = parseInt(Math.min(gasData?.co, maxValue));
+  const clippedValueCO2 = parseInt(Math.min(gasData?.co2, maxValue));
+  if (aiqLoader) {
+    return <Loader />;
+  }
   return (
-    <Card style={{ margin, height }} className="rounded-4">
+    <Card style={{ margin, minHeight: height }} className="rounded-4">
       <Card.Header
         as="h6"
         style={{ background: "#137E1D" }}
@@ -33,14 +38,14 @@ const clippedValueCO2 = parseInt(Math.min(gasData?.co2, maxValue));
         {title}
       </Card.Header>
 
-      <Card.Body className="p-0 m-0">
+      <Card.Body className="px-0">
         <div
-          className="d-flex justify-content-around align-items-center"
+          className="d-flex justify-content-center align-items-center"
           style={{ borderBottom: "1px solid #B4B1B1" }}
         >
           <ReactSpeedometer
-            labelFontSize='10'
-            valueTextFontSize='0'
+            labelFontSize="10"
+            valueTextFontSize="0"
             width={120}
             height={110}
             ringWidth={10}
@@ -59,19 +64,18 @@ const clippedValueCO2 = parseInt(Math.min(gasData?.co2, maxValue));
               "#7E0023",
             ]}
           />
-          <Card.Text className="p-0 m-auto">
+          <Card.Text className="px-4 px-md-1">
             <small>কার্বন মনোক্সাইড </small>
-            <p className="fw-bold">{convertToBanglaNumber(gasData?.co)} পিপিএম</p>
+            <p className="fw-bold">
+              {convertToBanglaNumber(gasData?.co)} পিপিএম
+            </p>
           </Card.Text>
         </div>
-     
-        <div
-          className="d-flex justify-content-around"
-        
-        >
+
+        <div className="d-flex justify-content-center align-items-center">
           <ReactSpeedometer
-            labelFontSize='10'
-            valueTextFontSize='0'
+            labelFontSize="10"
+            valueTextFontSize="0"
             paddingVertical={10}
             width={120}
             height={110}
@@ -91,9 +95,11 @@ const clippedValueCO2 = parseInt(Math.min(gasData?.co2, maxValue));
               "#7E0023",
             ]}
           />
-          <Card.Text className="p-0 m-auto">
-            <small>কার্বন ডাই অক্সাইড  </small>
-            <p className="fw-bold">{convertToBanglaNumber(gasData?.co2)} পিপিএম</p>
+          <Card.Text className="px-4 px-md-1">
+            <small>কার্বন ডাই অক্সাইড </small>
+            <p className="fw-bold">
+              {convertToBanglaNumber(gasData?.co2)} পিপিএম
+            </p>
           </Card.Text>
         </div>
       </Card.Body>

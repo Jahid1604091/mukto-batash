@@ -10,19 +10,20 @@ import steller from "../../../public/assets/images/steller.svg";
 import Image from "next/image";
 const Footer = () => {
   return (
-    <div className="bg-dark text-light py-3">
-      <Container>
+    <div className="bg-dark text-light py-3 px-4">
+      <Container fluid>
         <Row className="align-items-center">
-          <Col md={3}>
-            <p>
-              স্মার্ট বাংলাদেশ প্রতিষ্ঠায় পরিবেশ দূষণ পর্যবেক্ষণ ও প্রতিকারের
-              লক্ষ্যে ফ্যাক্টরি নেক্সট, বাংলাদেশের একটি জনকল্যান মুলক উদ্যোগ -{" "}
-            </p>
-            <h5>ওপেন এয়ার প্রজেক্ট (মুক্ত বাতাস)</h5>
-          </Col>
-          <Col md={9}>
-            <div className="d-flex justify-content-between">
-              <div className="d-flex align-items-center mx-auto px-4">
+          <Col xl={6}>
+            <Row className="align-items-center">
+              <Col md={6} className="text-center text-md-start">
+                <p>
+                  স্মার্ট বাংলাদেশ প্রতিষ্ঠায় পরিবেশ দূষণ পর্যবেক্ষণ ও
+                  প্রতিকারের লক্ষ্যে ফ্যাক্টরি নেক্সট, বাংলাদেশের একটি জনকল্যান
+                  মুলক উদ্যোগ -{" "}
+                </p>
+                <h5>ওপেন এয়ার প্রজেক্ট (মুক্ত বাতাস)</h5>
+              </Col>
+              <Col md={6}  className="text-center text-md-end">
                 <Image
                   src={fnLogotext}
                   alt="FN"
@@ -37,23 +38,45 @@ const Footer = () => {
                   height={90}
                   className="p-1"
                 />
-              </div>
+              </Col>
+            </Row>
+          </Col>
+
+          <Col xl={6}>
+            <div>
               <div className="bg-light rounded-4 px-4 py-1">
                 <h5 className="text-dark fw-bold">Partners</h5>
-                <div className="d-flex justify-content-between align-items-center">
-                  <Image src={bcc} width={120} height={90} alt="partner" />
-                  <Image src={ict} width={120} height={90} alt="partner" />
-                  <Image src={idea} width={120} height={90} alt="partner" />
-                  <Image src={arthor} width={120} height={90} alt="partner" />
-                  <Image src={steller} width={120} height={90} alt="partner" />
+                <div className="d-md-flex flex-wrap justify-content-around align-items-center">
+                  <Image src={bcc} width={100} height={90} alt="partner" />
+                  <Image src={ict} width={100} height={90} alt="partner" />
+                  <Image src={idea} width={100} height={90} alt="partner" />
+                  <Image src={arthor} width={100} height={90} alt="partner" />
+                  <Image src={steller} width={100} height={90} alt="partner" />
                 </div>
               </div>
             </div>
           </Col>
+
+          {/* <Col lg={6} className="mx-auto text-center text-md-start border">
+            <div className="d-flex justify-content-between">
+              <div className="bg-light rounded-4 px-4 py-1">
+                <h5 className="text-dark fw-bold">Partners</h5>
+                <div className="d-flex justify-content-between align-items-center">
+                  <Image src={bcc} width={100} height={90} alt="partner" />
+                  <Image src={ict} width={100} height={90} alt="partner" />
+                  <Image src={idea} width={100} height={90} alt="partner" />
+                  <Image src={arthor} width={100} height={90} alt="partner" />
+                  <Image src={steller} width={100} height={90} alt="partner" />
+                </div>
+              </div>
+            </div>
+          </Col> */}
         </Row>
       </Container>
       <hr />
-      <p className="text-center">&copy; {new Date().getFullYear()} | Factory Next | All rights reserved</p>
+      <p className="text-center">
+        &copy; {new Date().getFullYear()} | Factory Next | All rights reserved
+      </p>
     </div>
   );
 };

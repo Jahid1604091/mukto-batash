@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { config } from "@/app.config";
 import { convertToBanglaNumber } from "@/app/utils/helpers";
 
-function QualityIndexCard({ aiq }) {
+function QualityIndexCard({ aiq,aiqLoader }) {
 
   const getBgColor = (value) =>{
     if(value >0 && value <=50){
@@ -40,7 +40,7 @@ function QualityIndexCard({ aiq }) {
 
 
   return (
-    <Card style={{ width: "25rem", height: "23rem" }} className="rounded-4">
+    <Card style={{ height: "23rem" }} className="rounded-4">
       <Card.Header
         style={{ background: getBgColor(aiq) }}
         as="h4"

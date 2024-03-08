@@ -6,6 +6,7 @@ import TempForecast from "../TempForecast";
 import axios from "axios";
 import Humidity from "./Humidity";
 import AIQ from "./AIQ";
+import AIQForecast from "./AIQForecast";
 
 const Weather = () => {
   const [key, setKey] = useState("temperature");
@@ -35,11 +36,10 @@ const Weather = () => {
 
           <Tab eventKey="humidity" title="আর্দ্রতা">
             <Humidity weatherData={weatherData} />
-            <TempForecast weatherData={weatherData} />
           </Tab>
           <Tab eventKey="aqi" title="এয়ার কোয়ালিটি ইনডেক্স">
             <AIQ weatherData={weatherData} />
-            <TempForecast weatherData={weatherData} />
+            <AIQForecast weatherData={weatherData} />
           </Tab>
         </Tabs>
       </Card.Body>

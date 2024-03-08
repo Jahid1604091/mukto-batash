@@ -2,21 +2,28 @@ import { convertToBanglaNumber } from "@/app/utils/helpers";
 import React from "react";
 import { Card } from "react-bootstrap";
 import ReactSpeedometer from "react-d3-speedometer";
+import Loader from "../Loader";
 
 const DustQuality = ({
   title,
   width = "15rem",
-  height = "18rem",
+  height = "20rem",
   margin,
   airData,
+  aiqLoader,
 }) => {
-const maxValue = 300;
-const clippedValuePm1 = parseInt(Math.min(airData?.pm1, maxValue));
-const clippedValuePm25 = parseInt(Math.min(airData && airData['pm2.5'], maxValue));
-const clippedValuePm10 = parseInt(Math.min(airData?.pm10, maxValue));
+  const maxValue = 300;
+  const clippedValuePm1 = parseInt(Math.min(airData?.pm1, maxValue));
+  const clippedValuePm25 = parseInt(
+    Math.min(airData && airData["pm2.5"], maxValue)
+  );
+  const clippedValuePm10 = parseInt(Math.min(airData?.pm10, maxValue));
 
+  if (aiqLoader) {
+    return <Loader />;
+  }
   return (
-    <Card style={{ margin, height }} className="rounded-4">
+    <Card style={{ margin, minHeight: height }} className="rounded-4">
       <Card.Header
         as="h6"
         style={{ background: "#137E1D" }}
@@ -35,9 +42,9 @@ const clippedValuePm10 = parseInt(Math.min(airData?.pm10, maxValue));
         {title}
       </Card.Header>
 
-      <Card.Body className="p-0 m-0">
+      <Card.Body className="px-0">
         <div
-          className="d-flex justify-content-around"
+          className="d-flex justify-content-center align-items-center"
           style={{ borderBottom: "1px solid #B4B1B1" }}
         >
           <ReactSpeedometer
@@ -61,14 +68,16 @@ const clippedValuePm10 = parseInt(Math.min(airData?.pm10, maxValue));
               "#7E0023",
             ]}
           />
-          <Card.Text className="p-0 m-auto">
+          <Card.Text className="px-4 px-md-1">
             <small>পি এম ১</small>
-            <p className="fw-bold">{convertToBanglaNumber(airData?.pm1)} পিপিএম</p>
+            <p className="fw-bold">
+              {convertToBanglaNumber(airData?.pm1)} পিপিএম
+            </p>
           </Card.Text>
         </div>
 
         <div
-          className="d-flex justify-content-around"
+          className="d-flex justify-content-center align-items-center"
           style={{ borderBottom: "1px solid #B4B1B1" }}
         >
           <ReactSpeedometer
@@ -91,13 +100,15 @@ const clippedValuePm10 = parseInt(Math.min(airData?.pm10, maxValue));
               "#7E0023",
             ]}
           />
-          <Card.Text className="p-0 m-auto">
+          <Card.Text className="px-4 px-md-1">
             <small>পি এম ২.৫</small>
-            <p className="fw-bold">{convertToBanglaNumber(airData && airData["pm2.5"])} পিপিএম</p>
+            <p className="fw-bold">
+              {convertToBanglaNumber(airData && airData["pm2.5"])} পিপিএম
+            </p>
           </Card.Text>
         </div>
 
-        <div className="d-flex justify-content-around">
+        <div className="d-flex justify-content-center align-items-center">
           <ReactSpeedometer
             labelFontSize="10"
             valueTextFontSize="0"
@@ -119,9 +130,11 @@ const clippedValuePm10 = parseInt(Math.min(airData?.pm10, maxValue));
               "#7E0023",
             ]}
           />
-          <Card.Text className="p-0 m-auto">
+          <Card.Text className="px-4 px-md-1">
             <small>পি এম ১০</small>
-            <p className="fw-bold">{convertToBanglaNumber(airData?.pm10)} পিপিএম</p>
+            <p className="fw-bold">
+              {convertToBanglaNumber(airData?.pm10)} পিপিএম
+            </p>
           </Card.Text>
         </div>
       </Card.Body>

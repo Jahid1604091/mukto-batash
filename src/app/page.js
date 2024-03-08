@@ -18,21 +18,23 @@ export default function Home() {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedLocationId, setSelectedLocationId] = useState(null);
   const [aiqData, setAiqData] = useState(null);
+  const [position, setPosition] = useState(null)
+  const [locationLoader,setLocationLoader] = useState(false);
+  const [aiqLoader,setAiqLoader] = useState(false);
 
   async function fetchLocations() {
-    const { data } = await axios(`${config.BASE_URL}/locations?ln=bn`)
-    const locationsWithIntegerCoordinates = data?.map(location => ({
-      ...location,
-      coordinates: {
-        lat: parseFloat(location?.coordinates.lat),
-        lng: parseFloat(location?.coordinates.lng)
+    try {
+      setLocationLoader(true)
+      const { data } = await axios(`${config.BASE_URL}/locations?ln=bn`)
+      if (data) {
+        setLocations(data)
+        setSelectedLocation(data[0])
+        setSelectedLocationId(data[0]?.id)
+        setLocationLoader(false)
       }
-    }));
-
-    if (locationsWithIntegerCoordinates) {
-      setLocations(locationsWithIntegerCoordinates)
-      setSelectedLocation(locationsWithIntegerCoordinates[0])
-      setSelectedLocationId(locationsWithIntegerCoordinates[0]?.id)
+    } catch (error) {
+      console.log(`Error in Fetching Locations ${error}`)
+      setLocationLoader(false)
     }
   }
   useEffect(() => {
@@ -41,49 +43,89 @@ export default function Home() {
 
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setPosition(pos)
+        }
+      );
+    } else {
+
+    }
+  }, []);
+
+  async function fetchNearestLocation() {
+    const { data } = await axios(`${config.BASE_URL}/find-station?lat=${position.lat}&long=${position.lng}`)
+    
+    if (data) {
+      setSelectedLocation(data)
+      setSelectedLocationId(data?.id)
+    }
+    else{
+      setSelectedLocation(locations[0])
+      setSelectedLocationId(locations[0]?.id)
+    }
+  }
+  useEffect(() => {
+    fetchNearestLocation()
+  }, [position])
+
+
+  useEffect(() => {
     const selected_lcoation = locations?.find(loc => loc.id == selectedLocationId);
-   selected_lcoation && setSelectedLocation(selected_lcoation)
+    selected_lcoation && setSelectedLocation(selected_lcoation)
   }, [locations, selectedLocationId])
 
 
   async function fetchAIQData(selectedLocationId) {
-    const { data } = selectedLocationId && await axios(`${config.BASE_URL}/aiq-live?location=${selectedLocationId}&ln=en`)
-    data && setAiqData(data)
+    try {
+      setAiqLoader(true)
+      const { data } = selectedLocationId && await axios(`${config.BASE_URL}/aiq-live?location=${selectedLocationId}&ln=en`)
+      data && setAiqData(data)
+      setAiqLoader(false)
+    } catch (error) {
+      setAiqLoader(false)
+      console.log(`Error in fetching AIQ data ${error}`)
+    }
   }
   useEffect(() => {
     fetchAIQData(selectedLocationId)
-  }, [selectedLocationId])
+  }, [selectedLocationId,position])
 
 
   return (<>
-    <SubNavbar locations={locations} selectedLocation={selectedLocation} selectedLocationId={selectedLocationId} setSelectedLocationId={setSelectedLocationId} />
-    <main className="py-4 text-light" style={{ background: "#E3E3E3" }}>
-      <Container>
-        <Row className="align-items-center">
-          <Col xl={4}>
-            <QualityIndexCard aiq={aiqData?.aiq} />
+    <SubNavbar locationLoader={locationLoader} locations={locations} selectedLocation={selectedLocation} selectedLocationId={selectedLocationId} setSelectedLocationId={setSelectedLocationId} />
+    <main className="py-4 text-light px-4" style={{ background: "#E3E3E3" }}>
+      <Container fluid>
+        <Row className="align-items-md-center d-flex flex-wrap">
+          <Col lg={6} xl={4} className="mx-auto">
+            <QualityIndexCard aiq={aiqData?.aiq} aiqLoader={aiqLoader} />
           </Col>
-         <Col xl={8}>
-            <Row className="align-items-center">
-              <Col xl={4}>
-                <DustQuality title='ধূলিকণা' airData={aiqData?.sensor_data?.air} />
+          <Col lg={8} className="mx-auto my-2">
+            <Row className="align-items-center my-2 my-lg-0">
+              <Col lg={4} className="mb-2 mb-lg-0">
+                <DustQuality title='ধূলিকণা' airData={aiqData?.sensor_data?.air}  aiqLoader={aiqLoader} />
               </Col>
-              <Col xl={4}>
-                <HumQuality title='আর্দ্রতা ও তাপমাত্রা' rht={aiqData?.sensor_data?.rht} />
+              <Col lg={4} className="mb-2 mb-lg-0">
+                <HumQuality title='আর্দ্রতা ও তাপমাত্রা' rht={aiqData?.sensor_data?.rht}  aiqLoader={aiqLoader} />
               </Col>
-              <Col xl={4}>
-                <GasQuality title='ক্ষতিকারক গ্যাস' gasData={aiqData?.sensor_data} />
+              <Col lg={4}>
+                <GasQuality title='ক্ষতিকারক গ্যাস' gasData={aiqData?.sensor_data}  aiqLoader={aiqLoader} />
               </Col>
             </Row>
           </Col>
         </Row>
 
         <Row>
-          <Col md={4}>
+          <Col lg={4}>
             <h6 className="text-dark my-5 mb-2 fw-bold">ম্যাপ লোকেশন </h6>
             {locations && selectedLocation && <Map markers={locations} selectedMarker={selectedLocation} setSelectedLocationId={setSelectedLocationId} setSelectedMarker={setSelectedLocation} />}
           </Col>
-          <Col md={8}>
+          <Col lg={8}>
             <h6 className="text-dark my-5 mb-2 fw-bold">আগামী ৭ দিন বাতাসের গুনগত মান যেমন থাকতে পারে</h6>
             <Weather />
           </Col>

@@ -13,7 +13,7 @@ export const CustomTooltip = ({ active, payload, label }) => {
 
     return (
       <div className="custom-tooltip">
-        <p className="label">{` ${payload[0]?.value}`}</p>
+        <p className="label">{` ${payload[0]?.value}`} ppm</p>
       </div>
     );
 };

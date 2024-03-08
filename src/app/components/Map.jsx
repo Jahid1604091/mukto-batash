@@ -9,7 +9,7 @@ import { RequestType, geocode, setDefaults } from "react-geocode";
 import { config } from "@/app.config";
 
 const containerStyle = {
-  maxWidth: "400px",
+  minWidth: "300px",
   height: "330px",
   margin: "10px 0",
   borderRadius: "20px",
@@ -24,6 +24,7 @@ function Map({
   selectedMarker,
   setSelectedLocationId,
   setSelectedMarker,
+
 }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",

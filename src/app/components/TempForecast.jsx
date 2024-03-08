@@ -22,10 +22,11 @@ const TempForecast = ({ weatherData }) => {
           {wd?.day_of_week}
           <div
             style={{
-              width: "50px",
-              height: "50px",
+              width: "40px",
+              height: "40px",
               borderRadius: "100%",
-              background: getSunColor(wd.temperature.low,wd.temperature.high)
+              background: 'yellow',
+              margin:"1px"
             }}
           ></div>
           <p>{wd.temperature.high} &deg; <small className="text-secondary">{wd.temperature.low} &deg; </small></p>
