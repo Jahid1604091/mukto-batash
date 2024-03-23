@@ -38,9 +38,8 @@ function QualityIndexCard({ aiq,aiqLoader }) {
     fetchAIQStandards();
   }, []);
 
-
   return (
-    <Card style={{ height: "23rem" }} className="rounded-4">
+    <Card style={{ minHeight: "23rem" }} className="rounded-4">
       <Card.Header
         style={{ background: getBgColor(aiq) }}
         as="h4"
@@ -167,8 +166,8 @@ function QualityIndexCard({ aiq,aiqLoader }) {
           </tr>
         </tbody>
       </Table>
-      <div className="text-center" style={{ marginTop: "-10px" }}>
-        <p>এয়ার কোয়ালিটি ইনডেক্স (নির্দেশক রং ও তার অর্থ)</p>
+      <div className="text-center" style={{ marginTop: "-13px" }}>
+        <small>এয়ার কোয়ালিটি ইনডেক্স (নির্দেশক রং ও তার অর্থ)</small>
       </div>
     </Card>
   );
