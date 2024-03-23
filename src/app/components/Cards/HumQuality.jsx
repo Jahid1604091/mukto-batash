@@ -41,8 +41,8 @@ const HumQuality = ({
           className="d-flex align-items-center justify-content-center"
           style={{ borderBottom: "1px solid #B4B1B1" }}
         >
-          <Image src={humIcon} />
-          <Card.Text className="my-4 text-end" style={{ width: "120px" }}>
+          <Image src={humIcon} alt='Humidity Quality' />
+          <Card.Text  as='div'  className="my-4 text-end" style={{ width: "120px" }}>
             <small>তাপমাত্রা</small>
             <p className="fw-bold">
               {convertToBanglaNumber(rht?.temperature)} &deg; সেলসিয়াস
@@ -51,8 +51,8 @@ const HumQuality = ({
         </div>
 
         <div className="d-flex align-items-center justify-content-center">
-          <Image src={humIcon} />
-          <Card.Text className="my-4 text-end" style={{ width: "120px" }}>
+          <Image src={humIcon} alt='Humidity Quality' />
+          <Card.Text  as='div'  className="my-4 text-end" style={{ width: "120px" }}>
             <small>আর্দ্রতা</small>
             <p className="fw-bold">{convertToBanglaNumber(rht?.humidity)} %</p>
           </Card.Text>

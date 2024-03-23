@@ -52,7 +52,7 @@ function QualityIndexCard({ aiq,aiqLoader }) {
       </Card.Header>
       <Card.Body className="d-flex">
         <Image src={mask} alt="mask" width={60} height={60} className="mx-3" />
-        <Card.Text>
+        <Card.Text  as='div'>
           বাতাসে অতিরিক্ত ধুলাবালি ও কার্বন-মনোক্সাইডের উপস্থিতি রয়েছে দয়া করে
           মাস্ক ব্যবহার করুন
         </Card.Text>

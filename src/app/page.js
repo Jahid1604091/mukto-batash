@@ -59,8 +59,7 @@ export default function Home() {
   }, []);
 
   async function fetchNearestLocation() {
-    const { data } = await axios(`${config.BASE_URL}/find-station?lat=${position.lat}&long=${position.lng}`)
-    
+    const { data } = await axios(`${config.BASE_URL}/find-station?lat=${position?.lat}&long=${position?.lng}`)
     if (data) {
       setSelectedLocation(data)
       setSelectedLocationId(data?.id)
@@ -81,11 +80,11 @@ export default function Home() {
   }, [locations, selectedLocationId])
 
 
-  async function fetchAIQData(selectedLocationId) {
+  async function fetchAIQData() {
     try {
       setAiqLoader(true)
-      const { data } = selectedLocationId && await axios(`${config.BASE_URL}/aiq-live?location=${selectedLocationId}&ln=en`)
-      data && setAiqData(data)
+      const  data  = selectedLocationId && await axios(`${config.BASE_URL}/aiq-live?location=${selectedLocationId}&ln=en`)
+      data && setAiqData(data?.data)
       setAiqLoader(false)
     } catch (error) {
       setAiqLoader(false)
@@ -93,7 +92,7 @@ export default function Home() {
     }
   }
   useEffect(() => {
-    fetchAIQData(selectedLocationId)
+    fetchAIQData()
   }, [selectedLocationId,position])
 
 

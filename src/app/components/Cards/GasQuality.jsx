@@ -64,7 +64,7 @@ const GasQuality = ({
               "#7E0023",
             ]}
           />
-          <Card.Text className="px-4 px-md-1">
+          <Card.Text  as='div'  className="px-4 px-md-1">
             <small>কার্বন মনোক্সাইড </small>
             <p className="fw-bold">
               {convertToBanglaNumber(gasData?.co)} পিপিএম
@@ -95,7 +95,7 @@ const GasQuality = ({
               "#7E0023",
             ]}
           />
-          <Card.Text className="px-4 px-md-1">
+          <Card.Text  as='div'  className="px-4 px-md-1">
             <small>কার্বন ডাই অক্সাইড </small>
             <p className="fw-bold">
               {convertToBanglaNumber(gasData?.co2)} পিপিএম

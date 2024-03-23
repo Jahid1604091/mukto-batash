@@ -68,7 +68,7 @@ const DustQuality = ({
               "#7E0023",
             ]}
           />
-          <Card.Text className="px-4 px-md-1">
+          <Card.Text as='div' className="px-4 px-md-1">
             <small>পি এম ১</small>
             <p className="fw-bold">
               {convertToBanglaNumber(airData?.pm1)} পিপিএম
@@ -100,7 +100,7 @@ const DustQuality = ({
               "#7E0023",
             ]}
           />
-          <Card.Text className="px-4 px-md-1">
+          <Card.Text  as='div'  className="px-4 px-md-1">
             <small>পি এম ২.৫</small>
             <p className="fw-bold">
               {convertToBanglaNumber(airData && airData["pm2.5"])} পিপিএম
@@ -130,7 +130,7 @@ const DustQuality = ({
               "#7E0023",
             ]}
           />
-          <Card.Text className="px-4 px-md-1">
+          <Card.Text  as='div'  className="px-4 px-md-1">
             <small>পি এম ১০</small>
             <p className="fw-bold">
               {convertToBanglaNumber(airData?.pm10)} পিপিএম
