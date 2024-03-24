@@ -34,7 +34,7 @@ const SubNavbar = ({
                 <option
                   key={loc.id}
                   value={loc.id}
-                  defaultValue={loc.id == selectedLocationId}
+                  selected={loc.id == selectedLocationId}
                 >
                   {loc.location}
                 </option>
