@@ -3,14 +3,16 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import ReactSpeedometer from "react-d3-speedometer";
 import Loader from "../Loader";
+import { withTranslation } from "react-i18next";
 
 const GasQuality = ({
-  title,
   width = "15rem",
   height = "20rem",
   margin,
   gasData,
   aiqLoader,
+  checkedA,
+  t
 }) => {
   const maxValue = 300;
   const clippedValueCO = parseInt(Math.min(gasData?.co, maxValue));
@@ -35,7 +37,7 @@ const GasQuality = ({
             marginRight: "5px",
           }}
         ></div>{" "}
-        {title}
+        {t('gas_q_title')}
       </Card.Header>
 
       <Card.Body className="px-0">
@@ -65,9 +67,9 @@ const GasQuality = ({
             ]}
           />
           <Card.Text  as='div'  className="px-4 px-md-1">
-            <small>কার্বন মনোক্সাইড </small>
+            <small>{t('co')}</small>
             <p className="fw-bold">
-              {convertToBanglaNumber(gasData?.co)} পিপিএম
+              {checkedA ? convertToBanglaNumber(gasData?.co) : gasData?.co} {t('ppm')}
             </p>
           </Card.Text>
         </div>
@@ -96,9 +98,9 @@ const GasQuality = ({
             ]}
           />
           <Card.Text  as='div'  className="px-4 px-md-1">
-            <small>কার্বন ডাই অক্সাইড </small>
+            <small>{t('co2')}</small>
             <p className="fw-bold">
-              {convertToBanglaNumber(gasData?.co2)} পিপিএম
+              {checkedA ? convertToBanglaNumber(gasData?.co2) : gasData?.co2} {t('ppm')}
             </p>
           </Card.Text>
         </div>
@@ -107,4 +109,4 @@ const GasQuality = ({
   );
 };
 
-export default GasQuality;
+export default withTranslation()(GasQuality);

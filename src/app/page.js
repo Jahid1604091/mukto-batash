@@ -16,6 +16,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import HttpApi from "i18next-http-backend";
 import NavbarComponent from "./components/Navbar";
 import { initReactI18next } from "react-i18next";
+import Footer from "./components/Footer";
 
 export default function Home() {
   const [locations, setLocations] = useState([]);
@@ -159,13 +160,13 @@ export default function Home() {
           <Col lg={8} className="mx-auto my-2">
             <Row className="align-items-center my-2 my-lg-0">
               <Col lg={4} className="mb-2 mb-lg-0">
-                <DustQuality title='ধূলিকণা' airData={aiqData?.sensor_data?.air} aiqLoader={aiqLoader} />
+                <DustQuality  airData={aiqData?.sensor_data?.air} aiqLoader={aiqLoader} checkedA={checkedA}/>
               </Col>
               <Col lg={4} className="mb-2 mb-lg-0">
-                <HumQuality title='আর্দ্রতা ও তাপমাত্রা' rht={aiqData?.sensor_data?.rht} aiqLoader={aiqLoader} />
+                <HumQuality  rht={aiqData?.sensor_data?.rht} aiqLoader={aiqLoader}  checkedA={checkedA} />
               </Col>
               <Col lg={4}>
-                <GasQuality title='ক্ষতিকারক গ্যাস' gasData={aiqData?.sensor_data} aiqLoader={aiqLoader} />
+                <GasQuality gasData={aiqData?.sensor_data} aiqLoader={aiqLoader}  checkedA={checkedA} />
               </Col>
             </Row>
           </Col>
@@ -173,17 +174,17 @@ export default function Home() {
 
         <Row>
           <Col lg={4}>
-            <h6 className="text-dark my-5 mb-2 fw-bold">ম্যাপ লোকেশন </h6>
+          
             {locations && selectedLocation && <Map markers={locations} selectedMarker={selectedLocation} setSelectedLocationId={setSelectedLocationId} setSelectedMarker={setSelectedLocation} />}
           </Col>
           <Col lg={8}>
-            <h6 className="text-dark my-5 mb-2 fw-bold">আগামী ৭ দিন বাতাসের গুনগত মান যেমন থাকতে পারে</h6>
+           
             <Weather />
           </Col>
         </Row>
       </Container>
     </main>
-
+    <Footer/>
   </>
   );
 }

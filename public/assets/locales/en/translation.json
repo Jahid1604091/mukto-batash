@@ -6,6 +6,23 @@
     "current_loc":"You can see directly information of {{curr_loc}} now",
     "air_q_idx_title":"Air Quality Index",
     "air_q_idx_desc":"The air contains excess dust and carbon-monoxide, please use a mask",
-    "air_q_idx_indicator":"Air Quality Index (indicative colors with their meanings)"
+    "air_q_idx_indicator":"Air Quality Index (indicative colors with their meanings)",
+    "dust_q_title":"Dust",
+    "dust_q_ppm1":"PM 1",
+    "dust_q_ppm2.5":"PM 2.5",
+    "dust_q_ppm10":"PM 10",
+    "ppm":"ppm",
+    "hum & temp":"Humidity & Temperature",
+    "temperature":"Temperature",
+    "celcius":"C",
+    "humidity":"Humidity",
+    "gas_q_title":"Harmful Gas",
+    "co":"Carbon Monoxide",
+    "co2":"Carbon Dioxide",
+    "map_location_title":"MAP Location",
+    "weather_forecast_title":"Air quality forecast for the next 7 day",
+    "project_title":"Open Air Project",
+    "project_desc":"Factory Next, a public welfare initiative of Bangladesh aimed at monitoring and remediating environmental pollution in the establishment of Smart Bangladesh -"
+
 
 }

@@ -7,6 +7,7 @@ import {
 } from "@react-google-maps/api";
 import { RequestType, geocode, setDefaults } from "react-geocode";
 import { config } from "@/app.config";
+import { withTranslation } from "react-i18next";
 
 const containerStyle = {
   minWidth: "300px",
@@ -24,7 +25,7 @@ function Map({
   selectedMarker,
   setSelectedLocationId,
   setSelectedMarker,
-
+  t
 }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -33,8 +34,8 @@ function Map({
 
   const [map, setMap] = React.useState(null);
   const [center, setCenter] = useState({
-    lat: 23.77817600,
-    lng: 90.37498300,
+    lat: 23.778176,
+    lng: 90.374983,
   });
 
   let infoWindow;
@@ -91,37 +92,40 @@ function Map({
     setSelectedLocationId(marker.id);
   };
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={10}
-      // onLoad={onLoad}
-      // onUnmount={onUnmount}
-    >
-      {markers?.map((marker) => {
-        return (
-          <div key={marker.id}>
-            <Marker
-              position={marker.coordinates}
-              onClick={() => handleMarkerClick(marker)}
-            />
-          </div>
-        );
-      })}
-      {selectedMarker && (
-        <InfoWindow
-          position={selectedMarker?.coordinates}
-          onCloseClick={() => setSelectedMarker(selectedMarker)}
-        >
-          <>
-            <p className="text-dark">{selectedMarker?.location}</p>
-          </>
-        </InfoWindow>
-      )}
-    </GoogleMap>
+    <>
+      <h6 className="text-dark my-5 mb-2 fw-bold">{t('map_location_title')}</h6>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={10}
+        // onLoad={onLoad}
+        // onUnmount={onUnmount}
+      >
+        {markers?.map((marker) => {
+          return (
+            <div key={marker.id}>
+              <Marker
+                position={marker.coordinates}
+                onClick={() => handleMarkerClick(marker)}
+              />
+            </div>
+          );
+        })}
+        {selectedMarker && (
+          <InfoWindow
+            position={selectedMarker?.coordinates}
+            onCloseClick={() => setSelectedMarker(selectedMarker)}
+          >
+            <>
+              <p className="text-dark">{selectedMarker?.location}</p>
+            </>
+          </InfoWindow>
+        )}
+      </GoogleMap>
+    </>
   ) : (
     <></>
   );
 }
 
-export default React.memo(Map);
+export default withTranslation()(React.memo(Map));

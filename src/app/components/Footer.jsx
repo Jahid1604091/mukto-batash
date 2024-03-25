@@ -8,7 +8,9 @@ import idea from "../../../public/assets/images/idea.svg";
 import arthor from "../../../public/assets/images/arthor.svg";
 import steller from "../../../public/assets/images/steller.svg";
 import Image from "next/image";
-const Footer = () => {
+import { withTranslation } from "react-i18next";
+
+const Footer = ({t}) => {
   return (
     <div className="bg-dark text-light py-3 px-4">
       <Container fluid>
@@ -17,11 +19,9 @@ const Footer = () => {
             <Row className="align-items-center">
               <Col md={6} className="text-center text-md-start">
                 <p>
-                  স্মার্ট বাংলাদেশ প্রতিষ্ঠায় পরিবেশ দূষণ পর্যবেক্ষণ ও
-                  প্রতিকারের লক্ষ্যে ফ্যাক্টরি নেক্সট, বাংলাদেশের একটি জনকল্যান
-                  মুলক উদ্যোগ -{" "}
+               {t('project_desc')}
                 </p>
-                <h5>ওপেন এয়ার প্রজেক্ট (মুক্ত বাতাস)</h5>
+                <h5>{t('project_title')} (মুক্ত বাতাস)</h5>
               </Col>
               <Col md={6}  className="text-center text-md-end">
                 <Image
@@ -56,21 +56,6 @@ const Footer = () => {
               </div>
             </div>
           </Col>
-
-          {/* <Col lg={6} className="mx-auto text-center text-md-start border">
-            <div className="d-flex justify-content-between">
-              <div className="bg-light rounded-4 px-4 py-1">
-                <h5 className="text-dark fw-bold">Partners</h5>
-                <div className="d-flex justify-content-between align-items-center">
-                  <Image src={bcc} width={100} height={90} alt="partner" />
-                  <Image src={ict} width={100} height={90} alt="partner" />
-                  <Image src={idea} width={100} height={90} alt="partner" />
-                  <Image src={arthor} width={100} height={90} alt="partner" />
-                  <Image src={steller} width={100} height={90} alt="partner" />
-                </div>
-              </div>
-            </div>
-          </Col> */}
         </Row>
       </Container>
       <hr />
@@ -81,4 +66,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default withTranslation()(Footer);

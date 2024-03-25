@@ -3,14 +3,16 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import ReactSpeedometer from "react-d3-speedometer";
 import Loader from "../Loader";
+import { withTranslation } from "react-i18next";
 
 const DustQuality = ({
-  title,
   width = "15rem",
   height = "20rem",
   margin,
   airData,
   aiqLoader,
+  t,
+  checkedA
 }) => {
   const maxValue = 300;
   const clippedValuePm1 = parseInt(Math.min(airData?.pm1, maxValue));
@@ -39,7 +41,7 @@ const DustQuality = ({
             marginRight: "5px",
           }}
         ></div>{" "}
-        {title}
+        {t('dust_q_title')}
       </Card.Header>
 
       <Card.Body className="px-0">
@@ -69,9 +71,9 @@ const DustQuality = ({
             ]}
           />
           <Card.Text as='div' className="px-4 px-md-1">
-            <small>পি এম ১</small>
+            <small>{t('dust_q_ppm1')}</small>
             <p className="fw-bold">
-              {convertToBanglaNumber(airData?.pm1)} পিপিএম
+              {checkedA ? convertToBanglaNumber(airData?.pm1) : airData?.pm1} {t('ppm')}
             </p>
           </Card.Text>
         </div>
@@ -101,9 +103,9 @@ const DustQuality = ({
             ]}
           />
           <Card.Text  as='div'  className="px-4 px-md-1">
-            <small>পি এম ২.৫</small>
+            <small>{t('dust_q_ppm2.5')}</small>
             <p className="fw-bold">
-              {convertToBanglaNumber(airData && airData["pm2.5"])} পিপিএম
+              {checkedA ? convertToBanglaNumber(airData && airData["pm2.5"]) : airData && airData["pm2.5"]} {t('ppm')}
             </p>
           </Card.Text>
         </div>
@@ -131,9 +133,9 @@ const DustQuality = ({
             ]}
           />
           <Card.Text  as='div'  className="px-4 px-md-1">
-            <small>পি এম ১০</small>
+            <small>{t('dust_q_ppm10')}</small>
             <p className="fw-bold">
-              {convertToBanglaNumber(airData?.pm10)} পিপিএম
+              {checkedA ? convertToBanglaNumber(airData?.pm10) : airData?.pm10} {t('ppm')}
             </p>
           </Card.Text>
         </div>
@@ -142,4 +144,4 @@ const DustQuality = ({
   );
 };
 
-export default DustQuality;
+export default withTranslation()(DustQuality);

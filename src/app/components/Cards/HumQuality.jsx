@@ -4,14 +4,16 @@ import humIcon from "../../../../public/assets/images/hum.svg";
 import Image from "next/image";
 import { convertToBanglaNumber } from "@/app/utils/helpers";
 import Loader from "../Loader";
+import { withTranslation } from "react-i18next";
 
 const HumQuality = ({
-  title,
   width = "15rem",
   height = "20rem",
   margin,
   rht,
   aiqLoader,
+  checkedA,
+  t
 }) => {
   if (aiqLoader) {
     return <Loader/>;
@@ -33,7 +35,7 @@ const HumQuality = ({
             marginRight: "5px",
           }}
         ></div>{" "}
-        {title}
+        {t('hum & temp')}
       </Card.Header>
 
       <Card.Body className="p-0 m-0">
@@ -43,9 +45,9 @@ const HumQuality = ({
         >
           <Image src={humIcon} alt='Humidity Quality' />
           <Card.Text  as='div'  className="my-4 text-end" style={{ width: "120px" }}>
-            <small>তাপমাত্রা</small>
+            <small>{t('temperature')}</small>
             <p className="fw-bold">
-              {convertToBanglaNumber(rht?.temperature)} &deg; সেলসিয়াস
+              {checkedA ?  convertToBanglaNumber(rht?.temperature) : rht?.temperature} &deg; {t('celcius')}
             </p>
           </Card.Text>
         </div>
@@ -53,8 +55,8 @@ const HumQuality = ({
         <div className="d-flex align-items-center justify-content-center">
           <Image src={humIcon} alt='Humidity Quality' />
           <Card.Text  as='div'  className="my-4 text-end" style={{ width: "120px" }}>
-            <small>আর্দ্রতা</small>
-            <p className="fw-bold">{convertToBanglaNumber(rht?.humidity)} %</p>
+            <small>{t('humidity')}</small>
+            <p className="fw-bold">{checkedA ?  convertToBanglaNumber(rht?.humidity) : rht?.humidity} %</p>
           </Card.Text>
         </div>
       </Card.Body>
@@ -62,4 +64,4 @@ const HumQuality = ({
   );
 };
 
-export default HumQuality;
+export default withTranslation()(HumQuality);

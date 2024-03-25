@@ -7,8 +7,9 @@ import axios from "axios";
 import Humidity from "./Humidity";
 import AIQ from "./AIQ";
 import AIQForecast from "./AIQForecast";
+import { withTranslation } from "react-i18next";
 
-const Weather = () => {
+const Weather = ({t}) => {
   const [key, setKey] = useState("temperature");
   const [weatherData, setWeatherData] = useState([]);
 
@@ -21,30 +22,35 @@ const Weather = () => {
   }, []);
 
   return (
-    <Card className="rounded-4 bg-dark text-light">
-      <Card.Body>
-        <Tabs
-          defaultActiveKey="temperature"
-          className="mb-3 text-light border-0"
-          activeKey={key}
-          onSelect={(k) => setKey(k)}
-        >
-          <Tab eventKey="temperature" title="তাপমাত্রা">
-            <Temperature weatherData={weatherData} />
-            <TempForecast weatherData={weatherData} />
-          </Tab>
+    <>
+      <h6 className="text-dark my-5 mb-2 fw-bold">
+        {t('weather_forecast_title')}
+      </h6>
+      <Card className="rounded-4 bg-dark text-light">
+        <Card.Body>
+          <Tabs
+            defaultActiveKey="temperature"
+            className="mb-3 text-light border-0"
+            activeKey={key}
+            onSelect={(k) => setKey(k)}
+          >
+            <Tab eventKey="temperature" title={t('temperature')}>
+              <Temperature weatherData={weatherData} />
+              <TempForecast weatherData={weatherData} />
+            </Tab>
 
-          <Tab eventKey="humidity" title="আর্দ্রতা">
-            <Humidity weatherData={weatherData} />
-          </Tab>
-          <Tab eventKey="aqi" title="এয়ার কোয়ালিটি ইনডেক্স">
-            <AIQ weatherData={weatherData} />
-            <AIQForecast weatherData={weatherData} />
-          </Tab>
-        </Tabs>
-      </Card.Body>
-    </Card>
+            <Tab eventKey="humidity" title={t('humidity')}>
+              <Humidity weatherData={weatherData} />
+            </Tab>
+            <Tab eventKey="aqi" title={t('air_q_idx_title')}>
+              <AIQ weatherData={weatherData} />
+              <AIQForecast weatherData={weatherData} />
+            </Tab>
+          </Tabs>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 
-export default Weather;
+export default withTranslation()(Weather);
