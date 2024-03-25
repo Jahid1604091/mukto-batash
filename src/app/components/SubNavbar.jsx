@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import Loader from "./Loader";
+import { withTranslation } from "react-i18next";
 
 const SubNavbar = ({
   locations,
@@ -8,6 +9,7 @@ const SubNavbar = ({
   selectedLocationId,
   setSelectedLocationId,
   locationLoader,
+  t
 }) => {
   const handleChange = (e) => {
     setSelectedLocationId(e.target.value);
@@ -15,12 +17,13 @@ const SubNavbar = ({
   if (locationLoader) {
     return <Loader />;
   }
+  const curr_loc = selectedLocation?.location;
   return (
     <Container fluid>
       <div className="py-4 px-4">
         <Form.Group as={Row} className="mb-1 align-items-center">
           <Form.Label column xs={6} md={2} className="text-start mb-2 mb-md-0">
-            স্থান নির্বাচন করুন
+            {t('select_loc')}
           </Form.Label>
 
           <Col xs={6} md={4} lg={2} className="mb-2 mb-md-0">
@@ -44,8 +47,7 @@ const SubNavbar = ({
 
           <Col xs={12} md={{ span: 6, offset: 2 }} lg={{ span: 5, offset: 3 }}>
             <p className="mb-0 text-center text-md-end ">
-              {selectedLocation?.location &&
-                `আপনি এখন ${selectedLocation?.location} এর তথ্য সরাসরি দেখতে পাচ্ছেন`}
+              {t('current_loc',{curr_loc})}
             </p>
           </Col>
         </Form.Group>
@@ -54,4 +56,4 @@ const SubNavbar = ({
   );
 };
 
-export default SubNavbar;
+export default withTranslation()(SubNavbar);

@@ -5,8 +5,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { config } from "@/app.config";
 import { convertToBanglaNumber } from "@/app/utils/helpers";
+import { withTranslation } from "react-i18next";
 
-function QualityIndexCard({ aiq,aiqLoader }) {
+function QualityIndexCard({ aiq,aiqLoader,t,checkedA }) {
 
   const getBgColor = (value) =>{
     if(value >0 && value <=50){
@@ -46,15 +47,14 @@ function QualityIndexCard({ aiq,aiqLoader }) {
         className="fw-bold d-flex justify-content-between align-items-center rounded-top-4 text-light"
       >
         <p style={{ width: "15rem" }} className="text-wrap text-center">
-          এয়ার কোয়ালিটি ইনডেক্স
+          {t('air_q_idx_title')}
         </p>{" "}
-        <p className="display-6 fw-bold">{convertToBanglaNumber(aiq)}</p>{" "}
+        <p className="display-6 fw-bold">{checkedA ? convertToBanglaNumber(aiq) : aiq}</p>{" "}
       </Card.Header>
       <Card.Body className="d-flex">
         <Image src={mask} alt="mask" width={60} height={60} className="mx-3" />
         <Card.Text  as='div'>
-          বাতাসে অতিরিক্ত ধুলাবালি ও কার্বন-মনোক্সাইডের উপস্থিতি রয়েছে দয়া করে
-          মাস্ক ব্যবহার করুন
+         {t('air_q_idx_desc')}
         </Card.Text>
       </Card.Body>
       <Table
@@ -167,10 +167,10 @@ function QualityIndexCard({ aiq,aiqLoader }) {
         </tbody>
       </Table>
       <div className="text-center" style={{ marginTop: "-13px" }}>
-        <small>এয়ার কোয়ালিটি ইনডেক্স (নির্দেশক রং ও তার অর্থ)</small>
+        <small>{t('air_q_idx_indicator')}</small>
       </div>
     </Card>
   );
 }
 
-export default QualityIndexCard;
+export default withTranslation()(QualityIndexCard);

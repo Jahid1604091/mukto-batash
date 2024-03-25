@@ -1,0 +1,11 @@
+{
+    "name":"Open Air",
+    "application":"Application for set up open air sensor in your area",
+    "select_lang":"Select Language",
+    "select_loc":"Select Location",
+    "current_loc":"You can see directly information of {{curr_loc}} now",
+    "air_q_idx_title":"Air Quality Index",
+    "air_q_idx_desc":"The air contains excess dust and carbon-monoxide, please use a mask",
+    "air_q_idx_indicator":"Air Quality Index (indicative colors with their meanings)"
+
+}
